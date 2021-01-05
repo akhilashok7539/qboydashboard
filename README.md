@@ -1,2 +1,2 @@
-# qboydashboard
-qboydashboard
+# Qboy-AdminPanel
+Qboy AdminPanel
