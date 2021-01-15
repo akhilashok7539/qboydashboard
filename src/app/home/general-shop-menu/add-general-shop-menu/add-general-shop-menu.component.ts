@@ -109,6 +109,7 @@ export class AddGeneralShopMenuComponent implements OnInit {
     }
   )
   }
+
   submit() {
     this.submitted = true;
     this.isLoading = true;
