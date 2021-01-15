@@ -71,6 +71,13 @@
                         <mat-cell *matCellDef="let row"> {{row.shop_name}} </mat-cell>
                     </ng-container>
 
+                    <!-- Menu Type Column -->
+                    <ng-container matColumnDef="menutype">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header> Menu Type</mat-header-cell>
+                        <mat-cell *matCellDef="let row"> {{row.category_id.category_name}}</mat-cell>
+                    </ng-container>
+
+
                     <!-- Category Name Column -->
                     <ng-container matColumnDef="categoryname">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Category Name</mat-header-cell>
@@ -84,11 +91,11 @@
                     </ng-container>
 
 
-                    <!-- Service Location Column
-                    <ng-container matColumnDef="servicelocation">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Service Location </mat-header-cell>
+                    <!-- Delivery Time Column -->
+                    <ng-container matColumnDef="deliverytime">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Time </mat-header-cell>
                         <mat-cell *matCellDef="let row"> {{row.locationId.location}} </mat-cell>
-                    </ng-container> -->
+                    </ng-container>
 
                     <!--Status Column -->
                     <ng-container matColumnDef="status">

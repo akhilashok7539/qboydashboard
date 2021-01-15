@@ -29,6 +29,24 @@
                 </div>
 
                 <div class="col-sm-4">
+                    <label for="">Menu Type </label>
+
+                    <select name="" id="" class="form-control" [(ngModel)]="menutype" [ngClass]="{ 'is-invalid': submitted && f.menutype.errors }" formControlName="menutype">
+                        
+                        <option value="" disabled selected>Choose a option </option>
+                        <option value="1">PURE VEGETARIAN</option>
+                        <option value="2">NON-VEGETARIAN</option>
+                        <!-- <option *ngFor="let c of resultscat" value="{{c._id}}">{{c.category_name}}</option> -->
+                    </select>
+                    <div *ngIf="submitted && f.menutype.errors" class="invalid-feedback">
+                        <div *ngIf="f.menutype.errors.required">Menu Type is required</div>
+
+                    </div>
+                </div>
+
+
+
+                <div class="col-sm-4">
                     <label for="">Shop Category </label>
 
                     <select name="" id="" class="form-control" [(ngModel)]="scat" [ngClass]="{ 'is-invalid': submitted && f.scat.errors }" formControlName="scat">
@@ -130,6 +148,16 @@
 
                     <div *ngIf="submitted && f.sdperc.errors" class="invalid-feedback">
                         <div *ngIf="f.sdperc.errors.required">Shop discount percentage is required</div>
+
+                    </div>
+                </div>
+
+                <div class="col-sm-4">
+                    <label for="">Delivery Time </label>
+                    <input type="number" class="form-control" placeholder="Enter the Delivery Time" [(ngModel)]="deliverytime" [ngClass]="{ 'is-invalid': submitted && f.deliverytime.errors }" formControlName="deliverytime">
+
+                    <div *ngIf="submitted && f.deliverytime.errors" class="invalid-feedback">
+                        <div *ngIf="f.deliverytime.errors.required">Delivery Time is required</div>
 
                     </div>
                 </div>

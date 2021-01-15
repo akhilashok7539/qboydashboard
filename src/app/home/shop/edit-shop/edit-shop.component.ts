@@ -18,10 +18,12 @@ export class EditShopComponent implements OnInit {
   submitted = false;
   sname;
   scat = "";
+  menutype= "";
   saddress;
   simage;
   sln;
   sphn;
+  deliverytime;
   sotime;
   sctime;
   profit;
@@ -52,11 +54,11 @@ export class EditShopComponent implements OnInit {
       sname: ['', Validators.required],
       scat: ['', Validators.required],
       saddress: ['', Validators.required],
-
+      menutype: ['', Validators.required],
       sln: ['', Validators.required],
       sphn: ['', Validators.required],
       sotime: ['', Validators.required],
-
+      deliverytime:['', Validators.required],
       sctime: ['', Validators.required],
       profit: ['', Validators.required],
       movalue: ['', Validators.required],

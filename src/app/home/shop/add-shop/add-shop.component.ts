@@ -43,6 +43,7 @@ export class AddShopComponent implements OnInit {
 
   sname;
   scat = "";
+  menutype= "";
   saddress;
   simage;
   sln;
@@ -59,6 +60,7 @@ export class AddShopComponent implements OnInit {
   status = "Active";
   check;
   checkeddays;
+  deliverytime;
   files;
   currentphoto;
   resultscat: any = [];
@@ -73,8 +75,11 @@ export class AddShopComponent implements OnInit {
     this.shopFormRegistration = this.formbuilder.group({
       sname: ['', Validators.required],
       scat: ['', Validators.required],
+      menutype: ['', Validators.required],
+     
       saddress: ['', Validators.required],
       sln: [''],
+      deliverytime: ['', Validators.required],
       sphn: ['', Validators.required],
       sotime: ['', Validators.required],
       sctime: ['', Validators.required],
