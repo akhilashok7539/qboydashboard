@@ -31,6 +31,7 @@ export class AddCategoryComponent implements OnInit {
   // mtype="";
   // mctype="";
   // mstyle="";
+  listtype="Grid";
   formData = new FormData();
   isLoading = false;
   button = 'Submit';
@@ -38,6 +39,12 @@ export class AddCategoryComponent implements OnInit {
   repeatsessiondays:any=[];
   value;
   locations :any =[];
+
+fileData: any;
+error;
+imagePreview;
+employee
+isvalidphoto = false;
   constructor(private formbuilder:FormBuilder,private toaster:ToastrService,
     private easydealservice:EasydealService,private router:Router) { }
 
@@ -54,6 +61,7 @@ export class AddCategoryComponent implements OnInit {
         // mctype: ['', Validators.required],
         // mstyle: ['', Validators.required],
         check: ['', Validators.required],
+        listtype:['', Validators.required],
         checkeddays: this.formbuilder.array([]),
     })
     this.getalllocations();
@@ -71,7 +79,9 @@ get f() { return this.categoryFormRegistration.controls; }
         return;
     }
     else{
-      this.isLoading = true;
+      if(this.isvalidphoto == false)
+      {
+        this.isLoading = true;
       this.button = 'Processing';
       this.formData.append("category_name",this.cname.toUpperCase( ))
       this.formData.append("show",this.showorhide)
@@ -90,7 +100,7 @@ get f() { return this.categoryFormRegistration.controls; }
        error=>{
         this.isLoading = false;
         this.button = 'Submit';
-        let err = error['responce'];
+        let err = error.error['responce'];
         this.toaster.error(err);
 
          console.log(error);
@@ -99,6 +109,14 @@ get f() { return this.categoryFormRegistration.controls; }
        }
        
      )
+      }
+      else 
+      {
+        this.isLoading = false;
+        this.button = 'Submit';
+        this.toaster.error('photo should be 1000*554 size');
+      }
+      
 
     }
   }
@@ -143,10 +161,43 @@ get f() { return this.categoryFormRegistration.controls; }
     )
   }
   addcategoryimage(event) {
-
+    this.isvalidphoto = true;
     this.files = event.target.files;
     this.currentphoto = this.files.item(0);
+    window.URL = window.URL;
     
-    //  console.log(this.currentFoto)
-  }
+    
+    let reader = new FileReader();
+    if (event.target.files && event.target.files.length > 0) {
+      this.files = event.target.files[0];
+    
+      let img = new Image();
+    
+      img.src = window.URL.createObjectURL( this.files );
+      reader.readAsDataURL(this.files);
+      reader.onload = () => {
+        setTimeout(() => {
+          const width = img.naturalWidth;
+          const height = img.naturalHeight;
+    
+          window.URL.revokeObjectURL( img.src );
+          console.log(width + '*' + height);
+          if ( width !== 1000 && height !== 554) {
+            console.log(width,height)
+            this.isvalidphoto = true;
+            this.toaster.error('photo should be 1000*554 size');
+            
+            // form.reset();
+          } else {
+            this.isvalidphoto = false;
+              console.log(width,height)
+            // this.imgURL = reader.result;
+         
+          
+          }
+        }, 1000);
+          };
+      }
+      }
+    
 }

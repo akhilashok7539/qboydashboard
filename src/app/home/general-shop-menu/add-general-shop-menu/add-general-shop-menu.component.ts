@@ -33,7 +33,6 @@ export class AddGeneralShopMenuComponent implements OnInit {
   cleaning;
 
   locations:any=[];
-
     constructor(private formbuilder: FormBuilder, private easydeelservice: EasydealService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
@@ -101,6 +100,20 @@ export class AddGeneralShopMenuComponent implements OnInit {
   data=>
   {
   this.generalmenu=data;
+  this.generalmenu.sort(function (a,b)
+  {
+    if(a['menu_name'] <b['menu_name'])
+    {
+      return -1;
+    }
+    else if(a['menu_name'] >b['menu_name'])
+    {
+      return 1;
+    }
+    else {
+      return 0;
+    }
+  });
   // this.dataSource.data = this.results;
   },
     error =>
@@ -109,7 +122,6 @@ export class AddGeneralShopMenuComponent implements OnInit {
     }
   )
   }
-
   submit() {
     this.submitted = true;
     this.isLoading = true;
@@ -172,6 +184,7 @@ export class AddGeneralShopMenuComponent implements OnInit {
       error =>{
 
       }
+      
     )
 
     

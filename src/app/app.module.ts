@@ -84,6 +84,10 @@ import { EditShopCredentialsComponent } from './settings/shop-credentials/edit-s
 import { AdminCredentialsComponent } from './settings/admin-credentials/admin-credentials.component';
 import { AddAdminCredentialsComponent } from './settings/admin-credentials/add-admin-credentials/add-admin-credentials.component';
 import { EditAdminCredentialsComponent } from './settings/admin-credentials/edit-admin-credentials/edit-admin-credentials.component';
+import { AddMenuApprovalRequestComponent } from './home/approval-request/add-menu-approval-request/add-menu-approval-request.component';
+import { EditMenuApprovalRequestComponent } from './home/approval-request/edit-menu-approval-request/edit-menu-approval-request.component';
+import { ViewOrderDetailsComponent } from './home/orders/view-order-details/view-order-details.component';
+import { ViewPreOrdersComponent } from './home/pre-orders/view-pre-orders/view-pre-orders.component';
 
 // import { MatSort } from '@angular/material/sort';
 
@@ -167,6 +171,10 @@ import { EditAdminCredentialsComponent } from './settings/admin-credentials/edit
     AdminCredentialsComponent,
     AddAdminCredentialsComponent,
     EditAdminCredentialsComponent,
+    AddMenuApprovalRequestComponent,
+    EditMenuApprovalRequestComponent,
+    ViewOrderDetailsComponent,
+    ViewPreOrdersComponent,
  
     // MatSort
   ],

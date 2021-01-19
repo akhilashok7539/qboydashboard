@@ -112,46 +112,19 @@ export class AddOffersComponent implements OnInit {
     else {
       this.isLoading = true;
       this.button = 'Processing';
-
-      if(this.otmethod=='Offers')
-      {
-        this.formData.append("shop_id", this.sname);
-        this.formData.append("menu_name", this.mname);
-        this.formData.append("location_id", this.oloc);
-        this.formData.append("description", this.odes);
-        this.formData.append("total_qnty", "1");
-        this.formData.append("number_users", "1");
-        this.formData.append("offer_price", this.oprice);
-        this.formData.append("actual_price", this.aprice);
-        this.formData.append("available_date", this.adata);
-        this.formData.append("available_time", this.atime);
-        this.formData.append("clos_time", this.ctime);
-        this.formData.append("cashback", this.cashback);
-        this.formData.append("offer_img", this.currentphoto);
-        this.formData.append("purchase_price",this.pprice);
-        this.formData.append("off","Offers")
-
-      }
-      else
-    {
       this.formData.append("shop_id", this.sname);
       this.formData.append("menu_name", this.mname);
       this.formData.append("location_id", this.oloc);
       this.formData.append("description", this.odes);
-      this.formData.append("total_qnty",this.tqpurc);
+      this.formData.append("total_qnty", this.tqpurc);
       this.formData.append("number_users", this.tnusers);
       this.formData.append("offer_price", this.oprice);
       this.formData.append("actual_price", this.aprice);
       this.formData.append("available_date", this.adata);
       this.formData.append("available_time", this.atime);
       this.formData.append("clos_time", this.ctime);
-      this.formData.append("cashback", "0");
-      this.formData.append("purchase_price",this.pprice);
+      this.formData.append("cashback", this.cashback);
       this.formData.append("offer_img", this.currentphoto);
-      this.formData.append("off","Topdeals")
-    }
-
-     
 
       this.easydeelservice.addoffer(this.formData).subscribe(
         data => {
@@ -161,7 +134,6 @@ export class AddOffersComponent implements OnInit {
           this.router.navigate(['/offers']);
         },
         error => {
-          this.formData.delete;
           this.isLoading = false;
           this.button = 'Submit';
           this.toaster.error("Unable to add Offers");

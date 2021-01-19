@@ -48,7 +48,41 @@ export class EasydealService {
   editrestmenu(req, id) {
     return this.http.patch(this.apiUrl + 'menurest/edit/' + id, req);
 
+  }
+  getpreorerbyuserid(id){
+    return this.http.get(this.apiUrl+'preorders/items/'+id);
 
+  }
+  confirmorder(req,id)
+  {
+    return this.http.patch(this.apiUrl+"preorders/status/"+id,req);
+  }
+  getshopdetailsbyorderid(d)
+  {
+    return this.http.get(this.apiUrl+"orders/shop/item/"+d);
+  }
+  getalldeliveryboy(){
+    return this.http.get(this.apiUrl+'deliveryboy');
+
+  }
+  getorerbyuserid(s){
+    return this.http.get(this.apiUrl+'orders/items/'+s);
+
+  }
+  assignorder(s,userid,easydeel)
+  {
+    return this.http.patch(this.apiUrl+'orders/delivery/'+userid+'/'+easydeel,s);
+  }
+  reject(s,uid,esdeelid){
+    return this.http.patch(this.apiUrl+'orders/status/'+uid+'/'+esdeelid,s);
+  }
+  adddeliveryboy(req)
+  {
+    return this.http.post(this.apiUrl+"deliveryboy/signup",req)
+  }
+  getallusers()
+  {
+    return this.http.get(this.apiUrl+'users');
   }
   changestatusactive(e) {
     let req = {
@@ -56,6 +90,10 @@ export class EasydealService {
     }
 
     return this.http.patch(this.apiUrl + 'shop/edit/state/' + e, req);
+  }
+  addrestmenuforapproval(req){
+    return this.http.post(this.apiUrl + 'location_addrestaurent/post', req);
+
   }
 
   changerestaurantmenuactive(a) {
@@ -226,5 +264,7 @@ export class EasydealService {
   {
     return this.http.delete(this.apiUrl+'message/'+s);
   }
-  
+  login(req){
+    return this.http.post(this.apiUrl+"admin/login",req);
+  }
 }
