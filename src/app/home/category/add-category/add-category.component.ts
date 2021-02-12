@@ -182,10 +182,10 @@ get f() { return this.categoryFormRegistration.controls; }
     
           window.URL.revokeObjectURL( img.src );
           console.log(width + '*' + height);
-          if ( width !== 1000 && height !== 554) {
+          if ( width !== 223 && height !== 280) {
             console.log(width,height)
             this.isvalidphoto = true;
-            this.toaster.error('photo should be 1000*554 size');
+            this.toaster.error('photo should be 223*280 size');
             
             // form.reset();
           } else {
