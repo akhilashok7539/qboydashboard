@@ -10,7 +10,7 @@
             <div class="col-sm-4">
                 <div class="row">
                     <h4 class="page-title">SHOP</h4>
-                    <button class="btn btn-danger" style="height: 33px;
+                    <button class="btn btn-primary" style="height: 33px;
                     margin-left: 23px;" routerLink="/addshop"> Add shop</button>
 
                 </div>
@@ -49,7 +49,7 @@
                 </select>
             </div>
             <div class="col-sm-4">
-                <input type="text" class="form-control" placeholder="search here">
+                <input type="text" class="form-control" placeholder="search here" (keyup)="applyFilter($event.target.value)">
             </div>
         </div>
         <div class="row">
@@ -71,13 +71,6 @@
                         <mat-cell *matCellDef="let row"> {{row.shop_name}} </mat-cell>
                     </ng-container>
 
-                    <!-- Menu Type Column -->
-                    <ng-container matColumnDef="menutype">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header> Menu Type</mat-header-cell>
-                        <mat-cell *matCellDef="let row"> {{row.category_id.category_name}}</mat-cell>
-                    </ng-container>
-
-
                     <!-- Category Name Column -->
                     <ng-container matColumnDef="categoryname">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Category Name</mat-header-cell>
@@ -91,11 +84,11 @@
                     </ng-container>
 
 
-                    <!-- Delivery Time Column -->
-                    <ng-container matColumnDef="deliverytime">
-                        <mat-header-cell *matHeaderCellDef mat-sort-header>Delivery Time </mat-header-cell>
+                    <!-- Service Location Column
+                    <ng-container matColumnDef="servicelocation">
+                        <mat-header-cell *matHeaderCellDef mat-sort-header>Service Location </mat-header-cell>
                         <mat-cell *matCellDef="let row"> {{row.locationId.location}} </mat-cell>
-                    </ng-container>
+                    </ng-container> -->
 
                     <!--Status Column -->
                     <ng-container matColumnDef="status">

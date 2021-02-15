@@ -18,12 +18,10 @@ export class EditShopComponent implements OnInit {
   submitted = false;
   sname;
   scat = "";
-  menutype= "";
   saddress;
   simage;
   sln;
   sphn;
-  deliverytime;
   sotime;
   sctime;
   profit;
@@ -32,6 +30,7 @@ export class EditShopComponent implements OnInit {
   sdperc;
   pucharge;
   dcharge;
+  dtime;
   showorhide = "Show";
   status = "Active";
   check;
@@ -46,13 +45,12 @@ export class EditShopComponent implements OnInit {
   button = 'Submit';
   sessionarray:any=[];
   condtionyesorno = 'no';
-
   fileData: any;
 error;
 imagePreview;
 employee
 isvalidphoto = false;
-
+shoplocations:any=[];
 
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService, private router: Router,
     private toaster: ToastrService) { }
@@ -62,11 +60,11 @@ isvalidphoto = false;
       sname: ['', Validators.required],
       scat: ['', Validators.required],
       saddress: ['', Validators.required],
-      menutype: ['', Validators.required],
+
       sln: ['', Validators.required],
-      sphn: ['', Validators.required],
+      sphn: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
       sotime: ['', Validators.required],
-      deliverytime:['', Validators.required],
+
       sctime: ['', Validators.required],
       profit: ['', Validators.required],
       movalue: ['', Validators.required],
@@ -74,7 +72,7 @@ isvalidphoto = false;
       sdperc: ['', Validators.required],
       pucharge: ['', Validators.required],
       dcharge: ['', Validators.required],
-
+      dtime: ['', Validators.required],
       sdamnt: ['', Validators.required],
       simage: [''],
       showorhide: ['', Validators.required],
@@ -86,7 +84,7 @@ isvalidphoto = false;
     this.getalllocations();
     this.shopdetails = JSON.parse(sessionStorage.getItem("shop"));
     this.sname = this.shopdetails['shop_name']
-
+    this.dtime = this.shopdetails['deliveryTime']
     this.scat = this.shopdetails.category_id['_id']
     this.saddress = this.shopdetails['shop_address']
     this.sln = this.shopdetails['shop_landline']
@@ -102,15 +100,16 @@ isvalidphoto = false;
     this.showorhide = this.shopdetails['shop_show']
     this.status = this.shopdetails['shop_state']
     this.id=this.shopdetails['_id']
-    this.sessiondayssRepat = this.shopdetails['locationId'];
-    console.log(this.sessiondayssRepat);
-    // let arr = [];
-    for(let i=0;i<this.sessiondayssRepat.length;i++)
-    {
-      this.sessionarray.push(this.sessiondayssRepat[i]._id)
-    }
-    console.log(this.sessionarray);
-    this.sessiondayssRepat = this.sessionarray;
+    this.shoplocations = this.shopdetails['locationId'];
+    // this.sessiondayssRepat = this.shopdetails['locationId'];
+    // console.log(this.sessiondayssRepat);
+    // // let arr = [];
+    // for(let i=0;i<this.sessiondayssRepat.length;i++)
+    // {
+    //   this.sessionarray.push(this.sessiondayssRepat[i]._id)
+    // }
+    // console.log(this.sessionarray);
+    // this.sessiondayssRepat = this.sessionarray;
     
     // this.repeatsessiondays=this.shopdetails['locationId']
     // console.log(this.repeatsessiondays);
@@ -140,6 +139,8 @@ isvalidphoto = false;
     else {
       let index = emailFormArray.controls.findIndex(x => x.value == time)
       emailFormArray.removeAt(index);
+
+      // this.sessiondayssRepat.push(this.shoplocations);
     }
 
 
@@ -187,6 +188,8 @@ isvalidphoto = false;
     this.isLoading = true;
     this.button = 'Processing';
     if (this.shopFormRegistration.invalid) {
+      this.isLoading = false;
+      this.button = 'submit';
       console.log("s")
       return;
     }
@@ -214,11 +217,22 @@ isvalidphoto = false;
       this.formData.append("shop_address", this.saddress)
 
       // this.formData.append("locationId", this.sessiondayssRepat['0'])
-      for (let i = 0; i < this.sessiondayssRepat.length; i++) {
-        this.formData.append("locationId",this.sessiondayssRepat[i])
-        // console.log("locationId", this.sessiondayssRepat[i]['_id']);
-        
+      console.log(this.sessiondayssRepat);
+      if(this.condtionyesorno == 'yes')
+      {
+        for (let i = 0; i < this.sessiondayssRepat.length; i++) {
+          this.formData.append("locationId",this.sessiondayssRepat[i])
+          // console.log("locationId", this.sessiondayssRepat[i]['_id']);
+          
+        }
       }
+      else{
+        for(let i=0;i<this.shoplocations.length;i++)
+        {
+          this.formData.append("locationId",this.shoplocations[i]._id)
+        }
+      }
+   
 
       this.easydealservice.editshop(this.formData,this.id).subscribe(
         data => {
@@ -262,10 +276,10 @@ isvalidphoto = false;
     
           window.URL.revokeObjectURL( img.src );
           console.log(width + '*' + height);
-          if ( width !== 1000 && height !== 554) {
+          if ( width !== 100 && height !== 100) {
             this.isvalidphoto = true;
               console.log(width,height)
-            this.toaster.error('photo should be 1000*554 size');
+            this.toaster.error('photo should be 100*100 size');
             
             // form.reset();
           } else {

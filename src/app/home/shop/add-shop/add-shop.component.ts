@@ -43,7 +43,6 @@ export class AddShopComponent implements OnInit {
 
   sname;
   scat = "";
-  menutype= "";
   saddress;
   simage;
   sln;
@@ -56,11 +55,11 @@ export class AddShopComponent implements OnInit {
   sdamnt;
   pucharge;
   dcharge;
+  dtime;
   showorhide = "Show";
   status = "Active";
   check;
   checkeddays;
-  deliverytime;
   files;
   currentphoto;
   resultscat: any = [];
@@ -68,6 +67,7 @@ export class AddShopComponent implements OnInit {
   isLoading = false;
   button = 'Submit';
 
+  
 fileData: any;
 error;
 imagePreview;
@@ -82,12 +82,10 @@ isvalidphoto = false;
     this.shopFormRegistration = this.formbuilder.group({
       sname: ['', Validators.required],
       scat: ['', Validators.required],
-      menutype: ['', Validators.required],
-     
       saddress: ['', Validators.required],
       sln: [''],
-      deliverytime: ['', Validators.required],
-      sphn: ['', Validators.required],
+      sphn: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
+      dtime: ['', Validators.required],
       sotime: ['', Validators.required],
       sctime: ['', Validators.required],
       profit: ['', Validators.required],
@@ -173,6 +171,8 @@ isvalidphoto = false;
     this.isLoading = true;
     this.button = 'Processing';
     if (this.shopFormRegistration.invalid) {
+      this.isLoading = false;
+      this.button = 'submit';
       return;
     }
     else {
@@ -184,6 +184,7 @@ isvalidphoto = false;
       this.formData.append("shop_landline", this.sln)
       this.formData.append("open_time",this.sotime)
       this.formData.append("clos_time",this.sctime)
+      this.formData.append("deliveryTime",this.dtime)
       // this.formData.append("open_time", "10")
       // this.formData.append("clos_time", "50")
       this.formData.append("shop_discount", this.sdperc)
@@ -244,10 +245,10 @@ isvalidphoto = false;
     
           window.URL.revokeObjectURL( img.src );
           console.log(width + '*' + height);
-          if ( width !== 1000 && height !== 554) {
+          if ( width !== 100 && height !== 100) {
             this.isvalidphoto = true;
               console.log(width,height)
-            this.toaster.error('photo should be 1000*554 size');
+            this.toaster.error('photo should be 100*100 size');
             
             // form.reset();
           } else {

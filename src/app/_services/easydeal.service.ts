@@ -8,10 +8,13 @@ import { Injectable } from '@angular/core';
 })
 export class EasydealService {
   BASEURL;
-  apiUrl = "https://qboy.in/";
+  apiUrl = "https://shopgi.in/";
   constructor(private http: HttpClient) {
     this.apiUrl;
 
+  }
+  login(req) {
+    return this.http.post(this.apiUrl + "admin/login", req);
   }
   getcat() {
     console.log(this.apiUrl);
@@ -25,7 +28,12 @@ export class EasydealService {
     return this.http.patch(this.apiUrl + 'category/edit/' + cat_id, formData);
 
   }
-
+  addlocationadmin(req) {
+    return this.http.post(this.apiUrl + 'admin/signup', req);
+  }
+  getalladmindetails() {
+    return this.http.get(this.apiUrl + 'admin');
+  }
   changecategorystatus(s) {
     let req = {
 
@@ -38,6 +46,10 @@ export class EasydealService {
 
     return this.http.get(this.apiUrl + 'shop');
   }
+
+  getallshopsbylocation(id) {
+    return this.http.get(this.apiUrl + 'shop/franchise/location/' + id);
+  }
   addshop(formData) {
     return this.http.post(this.apiUrl + 'shop/post', formData);
   }
@@ -48,41 +60,7 @@ export class EasydealService {
   editrestmenu(req, id) {
     return this.http.patch(this.apiUrl + 'menurest/edit/' + id, req);
 
-  }
-  getpreorerbyuserid(id){
-    return this.http.get(this.apiUrl+'preorders/items/'+id);
 
-  }
-  confirmorder(req,id)
-  {
-    return this.http.patch(this.apiUrl+"preorders/status/"+id,req);
-  }
-  getshopdetailsbyorderid(d)
-  {
-    return this.http.get(this.apiUrl+"orders/shop/item/"+d);
-  }
-  getalldeliveryboy(){
-    return this.http.get(this.apiUrl+'deliveryboy');
-
-  }
-  getorerbyuserid(s){
-    return this.http.get(this.apiUrl+'orders/items/'+s);
-
-  }
-  assignorder(s,userid,easydeel)
-  {
-    return this.http.patch(this.apiUrl+'orders/delivery/'+userid+'/'+easydeel,s);
-  }
-  reject(s,uid,esdeelid){
-    return this.http.patch(this.apiUrl+'orders/status/'+uid+'/'+esdeelid,s);
-  }
-  adddeliveryboy(req)
-  {
-    return this.http.post(this.apiUrl+"deliveryboy/signup",req)
-  }
-  getallusers()
-  {
-    return this.http.get(this.apiUrl+'users');
   }
   changestatusactive(e) {
     let req = {
@@ -90,10 +68,6 @@ export class EasydealService {
     }
 
     return this.http.patch(this.apiUrl + 'shop/edit/state/' + e, req);
-  }
-  addrestmenuforapproval(req){
-    return this.http.post(this.apiUrl + 'location_addrestaurent/post', req);
-
   }
 
   changerestaurantmenuactive(a) {
@@ -107,9 +81,8 @@ export class EasydealService {
 
     return this.http.get(this.apiUrl + 'location');
   }
-  getallgeneralmenubypagination(page)
-  {
-    return this.http.get(this.apiUrl + 'generalitem/pagination?page='+page);
+  getallgeneralmenubypagination(page) {
+    return this.http.get(this.apiUrl + 'generalitem/pagination?page=' + page);
 
   }
   addlocation(r) {
@@ -123,6 +96,10 @@ export class EasydealService {
     return this.http.get(this.apiUrl + 'cource');
 
   }
+  addrestmenuforapproval(req) {
+    return this.http.post(this.apiUrl + 'location_addrestaurent/post', req);
+
+  }
   addrestmenu(r) {
     return this.http.post(this.apiUrl + 'menurest/post', r);
 
@@ -133,10 +110,13 @@ export class EasydealService {
   }
 
 
-  getallmenubypagination(page)
-  {
-    return this.http.get(this.apiUrl + 'menurest?page='+page);
+  getallmenubypagination(page) {
+    return this.http.get(this.apiUrl + 'menurest?page=' + page);
 
+  }
+  searchresmenu(s)
+  {
+    return this.http.get(this.apiUrl+'menurest/search?data='+s);
   }
   changestatusrestmenu(s) {
     let req = {
@@ -144,6 +124,10 @@ export class EasydealService {
     }
     return this.http.patch(this.apiUrl + 'menurest/edit/state/' + s, req);
 
+  }
+  searchresmenubycourcetype(subcatid,searchkey)
+  {
+    return this.http.get(this.apiUrl+'menurest/search/'+subcatid+'?data='+searchkey);
   }
   addrestmenusss(fomrdata) {
     return this.http.post(this.apiUrl + 'addrestaurantmenu/post', fomrdata);
@@ -154,8 +138,12 @@ export class EasydealService {
     return this.http.patch(this.apiUrl + 'addrestaurantmenu/edit/' + id, fomrdata);
 
   }
-  getallmenus() {
-    return this.http.get(this.apiUrl + 'addrestaurantmenu/info');
+  getallmenus(page) {
+    return this.http.get(this.apiUrl + 'addrestaurantmenu/info?page='+page+'&limit=25');
+
+  }
+  getallmenusbylocation(id,page) {
+    return this.http.get(this.apiUrl + 'addrestaurantmenu/location/rest/' + id+'?page='+page+'&limit=25');
 
   }
   addgeneralitemmenu(s) {
@@ -197,6 +185,9 @@ export class EasydealService {
   getallgeneralshopmenu() {
     return this.http.get(this.apiUrl + 'generalshopmenu/info');
   }
+  getallshopmenubylocation(id) {
+    return this.http.get(this.apiUrl + 'generalshopmenu/location/' + id);
+  }
   changegmstatus(s) {
     let req = {
 
@@ -212,59 +203,147 @@ export class EasydealService {
 
 
   }
-  addoffer(formdata)
-  {
-    return this.http.post(this.apiUrl+'offers/post',formdata);
+  addoffer(formdata) {
+    return this.http.post(this.apiUrl + 'offers/post', formdata);
   }
-  getalloffers()
-  {
-    return this.http.get(this.apiUrl+'offers');
+  getalloffers() {
+    return this.http.get(this.apiUrl + 'offers');
 
   }
-  editoffer(formData,id){
-
-    return this.http.patch(this.apiUrl+'offers/edit/'+id,formData);
+  getalloffersybylocation(locationid) {
+    return this.http.get(this.apiUrl + 'offers/location/' + locationid);
 
   }
-  changeofferstatus(d)
-  {
-    let req= {
+  editoffer(formData, id) {
+
+    return this.http.patch(this.apiUrl + 'offers/edit/' + id, formData);
+
+  }
+  changeofferstatus(d) {
+    let req = {
 
     }
-    return this.http.patch(this.apiUrl+'offers/edit/state/'+d,req);
+    return this.http.patch(this.apiUrl + 'offers/edit/state/' + d, req);
 
   }
-  getalllocationbyshopid(s)
-  {
-    return this.http.get(this.apiUrl+'shop/location/'+s);
+  getalllocationbyshopid(s) {
+    return this.http.get(this.apiUrl + 'shop/location/' + s);
   }
-  getallshopmappedtorestaurant()
-  {
-    return this.http.get(this.apiUrl+'shop/category/menutype/rest');
+  getallshopmappedtorestaurant() {
+    return this.http.get(this.apiUrl + 'shop/category/menutype/rest');
   }
 
-  getshopsbygeneralcategory()
-  {
-    return this.http.get(this.apiUrl+'shop/category/menutype/general');
+  getshopsbygeneralcategory() {
+    return this.http.get(this.apiUrl + 'shop/category/menutype/general');
   }
-  getallorder()
-  {
-    return this.http.get(this.apiUrl+'orders');
+  getallorder() {
+    return this.http.get(this.apiUrl + 'orders');
   }
-  addmessages(req)
+  getallorderBylocation(s)
   {
-    return this.http.post(this.apiUrl+'message/add',req)
-  }
-  getmessages()
-  {
+    return this.http.get(this.apiUrl + 'orders/location/'+s);
 
-    return this.http.get(this.apiUrl+'message')
   }
-  deleteChatMessage(s)
+  addmessages(req) {
+    return this.http.post(this.apiUrl + 'message/add', req)
+  }
+  getmessages() {
+
+    return this.http.get(this.apiUrl + 'message')
+  }
+  deleteChatMessage(s) {
+    return this.http.delete(this.apiUrl + 'message/' + s);
+  }
+  adddeliveryboy(req) {
+    return this.http.post(this.apiUrl + "deliveryboy/signup", req)
+  }
+  getalldeliveryboy() {
+    return this.http.get(this.apiUrl + 'deliveryboy');
+
+  }
+  getalldeliveryboybylocations(id){
+    return this.http.get(this.apiUrl+'deliveryboy/location/'+id)
+  }
+  getorerbyuserid(s) {
+    return this.http.get(this.apiUrl + 'orders/items/' + s);
+
+  }
+  assignorder(s, userid, easydeel) {
+    return this.http.patch(this.apiUrl + 'orders/delivery/' + userid + '/' + easydeel, s);
+  }
+  reject(s, uid, esdeelid) {
+    return this.http.patch(this.apiUrl + 'orders/status/' + uid + '/' + esdeelid, s);
+  }
+  pending(s, uid, esdeelid) {
+    return this.http.patch(this.apiUrl + 'orders/status/' + uid + '/' + esdeelid, s);
+  }
+  getshopdetailsbyorderid(d) {
+    return this.http.get(this.apiUrl + "orders/shop/item/" + d);
+  }
+  getallpreorders() {
+    return this.http.get(this.apiUrl + 'preorders');
+  }
+  getpreorerbyuserid(id) {
+    return this.http.get(this.apiUrl + 'preorders/items/' + id);
+
+  }
+  confirmorder(req, id) {
+    return this.http.patch(this.apiUrl + "preorders/status/" + id, req);
+  }
+  getallusers() {
+    return this.http.get(this.apiUrl + 'users');
+  }
+  addupinumber(req) {
+    return this.http.post(this.apiUrl + 'upinumber/post', req);
+  }
+  getallupinumbers() {
+    return this.http.get(this.apiUrl + 'upinumber');
+
+  }
+  updateupi(req, id) {
+    return this.http.patch(this.apiUrl + 'upinumber/edit/' + id, req);
+  }
+  getallmeusforapproval() {
+    return this.http.get(this.apiUrl + 'location_addrestaurent');
+  }
+  approvemenu(s, id) {
+    return this.http.patch(this.apiUrl + 'location_addrestaurent/approved/' + id, s);
+
+  }
+  getwalletpoints() {
+    return this.http.get(this.apiUrl + 'walletpoint');
+  }
+  addwalletpoints(req) {
+    return this.http.post(this.apiUrl + 'walletpoint/post',req);
+  }
+  updatewalletpoints(req,id)
   {
-    return this.http.delete(this.apiUrl+'message/'+s);
+    return this.http.patch(this.apiUrl+'walletpoint/edit/'+id,req)
   }
-  login(req){
-    return this.http.post(this.apiUrl+"admin/login",req);
+  addadminphone(s) {
+    return this.http.post(this.apiUrl + 'master_phone/post', s);
   }
+  updateadminphone(s, id) {
+    return this.http.patch(this.apiUrl + 'master_phone/edit/' + id, s);
+
+  }
+  getadminphone() {
+    return this.http.get(this.apiUrl + 'master_phone');
+  }
+  addlocationadminphone(req)
+  {
+    return this.http.post(this.apiUrl+'branch_phone/post',req);
+  }
+  getallphonenumbers()
+  {
+    return this.http.get(this.apiUrl+'branch_phone');
+  }
+  updatelocationadminphone(req,id)
+{
+  return this.http.patch(this.apiUrl+'branch_phone/edit/'+id,req);
+}
+updatelocation(req,id)
+{
+  return this.http.patch(this.apiUrl+'location/edit/'+id,req);
+}
 }

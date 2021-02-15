@@ -54,6 +54,7 @@
 
                     <div *ngIf="submitted && f.mobile.errors" class="invalid-feedback">
                         <div *ngIf="f.mobile.errors.required">Mobile number is required</div>
+                        <div *ngIf="f.mobile.errors.pattern">Phone number must be valid number</div>
 
                     </div>
                 </div>
@@ -67,7 +68,6 @@
 
                     </div>
                 </div>
-
                 <div class="col-sm-4">
                     <label for=""> Location</label>
 
@@ -80,7 +80,6 @@
 
                     </div>
                 </div>
-
                 <div class="col-sm-4">
                     <label for="">Password </label>
                     <input type="password" class="form-control" placeholder="Enter Your Password" [(ngModel)]="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }" formControlName="password">

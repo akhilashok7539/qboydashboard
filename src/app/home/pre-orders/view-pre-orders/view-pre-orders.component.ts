@@ -9,6 +9,7 @@ import { EasydealService } from 'src/app/_services/easydeal.service';
   styleUrls: ['./view-pre-orders.component.css']
 })
 export class ViewPreOrdersComponent implements OnInit {
+
   result :any = [];
   details:any = [];
   itemresult:any = [];
@@ -18,6 +19,7 @@ export class ViewPreOrdersComponent implements OnInit {
   status ;
   dboyName;
   isStatus= false;
+  bookingid;
   constructor(@Inject(MAT_DIALOG_DATA) data, private easydeelservice:EasydealService,
   private toaster:ToastrService,
   private dialogRef: MatDialogRef<ViewPreOrdersComponent>) 

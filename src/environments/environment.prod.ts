@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl:"https://qboy.in/"
+  apiUrl:"https://shopgi.in/"
 };

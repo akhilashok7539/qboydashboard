@@ -7,7 +7,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
   styleUrls: ['./edit-chat-box.component.css']
 })
 export class EditChatBoxComponent implements OnInit {
-  editchatboxFormRegistration:FormGroup;
+ editchatboxFormRegistration:FormGroup;
   submitted = false;
   
   location;

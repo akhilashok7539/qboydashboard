@@ -7,7 +7,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
-
+import { SidebarComponent } from './sidebar/sidebar.component';
 import { HeaderComponent } from './header/header.component';
 import { CategoryComponent } from './home/category/category.component';
 import { ShopComponent } from './home/shop/shop.component';
@@ -74,26 +74,32 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { GeneralCategoryComponent } from './general-category/general-category.component';
 import { AddGeneralCategoryComponent } from './general-category/add-general-category/add-general-category.component';
 import { EditGeneralCategoryComponent } from './general-category/edit-general-category/edit-general-category.component';
-import { SidebarComponent } from './sidebar/sidebar.component';
+import { ShopcredentialsComponent } from './settings/shopcredentials/shopcredentials.component';
+import { AddShopCredentialsComponent } from './settings/shopcredentials/add-shop-credentials/add-shop-credentials.component';
+import { EditShopCredentialsComponent } from './settings/shopcredentials/edit-shop-credentials/edit-shop-credentials.component';
 import { ChatBoxComponent } from './settings/chat-box/chat-box.component';
 import { AddChatBoxComponent } from './settings/chat-box/add-chat-box/add-chat-box.component';
 import { EditChatBoxComponent } from './settings/chat-box/edit-chat-box/edit-chat-box.component';
-import { ShopCredentialsComponent } from './settings/shop-credentials/shop-credentials.component';
-import { AddShopCredentialsComponent } from './settings/shop-credentials/add-shop-credentials/add-shop-credentials.component';
-import { EditShopCredentialsComponent } from './settings/shop-credentials/edit-shop-credentials/edit-shop-credentials.component';
 import { AdminCredentialsComponent } from './settings/admin-credentials/admin-credentials.component';
 import { AddAdminCredentialsComponent } from './settings/admin-credentials/add-admin-credentials/add-admin-credentials.component';
 import { EditAdminCredentialsComponent } from './settings/admin-credentials/edit-admin-credentials/edit-admin-credentials.component';
-import { AddMenuApprovalRequestComponent } from './home/approval-request/add-menu-approval-request/add-menu-approval-request.component';
-import { EditMenuApprovalRequestComponent } from './home/approval-request/edit-menu-approval-request/edit-menu-approval-request.component';
 import { ViewOrderDetailsComponent } from './home/orders/view-order-details/view-order-details.component';
+import { ViewimageComponent } from './home/restaurant-menu/viewimage/viewimage.component';
 import { ViewPreOrdersComponent } from './home/pre-orders/view-pre-orders/view-pre-orders.component';
-
+import { UpiComponent } from './settings/upi/upi.component';
+import { AddUpiComponent } from './settings/upi/add-upi/add-upi.component';
+import { EditUpiComponent } from './settings/upi/edit-upi/edit-upi.component';
 // import { MatSort } from '@angular/material/sort';
 
 // import { AddPriceUpdatorComponent } from './settings/add-price-updator/add-price-updator.component';
 // import { EditPriceUpdatorComponent } from './settings/edit-price-updator/edit-price-updator.component';
-
+import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
+import { AddmenuForApprovalComponent } from './home/approval-request/addmenu-for-approval/addmenu-for-approval.component';
+import { EditmenuForApprovalComponent } from './home/approval-request/editmenu-for-approval/editmenu-for-approval.component';
+import { LocationAdminViewPendingrequestComponent } from './home/approval-request/location-admin-view-pendingrequest/location-admin-view-pendingrequest.component';
+import { LocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/location-admin-phonenumber.component';
+import { AddLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/add-location-admin-phonenumber/add-location-admin-phonenumber.component';
+import { EditLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/edit-location-admin-phonenumber/edit-location-admin-phonenumber.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -162,20 +168,27 @@ import { ViewPreOrdersComponent } from './home/pre-orders/view-pre-orders/view-p
     GeneralCategoryComponent,
     AddGeneralCategoryComponent,
     EditGeneralCategoryComponent,
+    ShopcredentialsComponent,
+    AddShopCredentialsComponent,
+    EditShopCredentialsComponent,
     ChatBoxComponent,
     AddChatBoxComponent,
     EditChatBoxComponent,
-    ShopCredentialsComponent,
-    AddShopCredentialsComponent,
-    EditShopCredentialsComponent,
     AdminCredentialsComponent,
     AddAdminCredentialsComponent,
     EditAdminCredentialsComponent,
-    AddMenuApprovalRequestComponent,
-    EditMenuApprovalRequestComponent,
     ViewOrderDetailsComponent,
+    ViewimageComponent,
     ViewPreOrdersComponent,
- 
+    UpiComponent,
+    AddUpiComponent,
+    EditUpiComponent,
+    AddmenuForApprovalComponent,
+    EditmenuForApprovalComponent,
+    LocationAdminViewPendingrequestComponent,
+    LocationAdminPhonenumberComponent,
+    AddLocationAdminPhonenumberComponent,
+    EditLocationAdminPhonenumberComponent,
     // MatSort
   ],
   imports: [
@@ -187,7 +200,11 @@ import { ViewPreOrdersComponent } from './home/pre-orders/view-pre-orders/view-p
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
+    NgxMatSelectSearchModule
   ],
+
+  entryComponents: [ViewOrderDetailsComponent,ViewimageComponent,ViewPreOrdersComponent],
+  
   providers: [{provide: LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })

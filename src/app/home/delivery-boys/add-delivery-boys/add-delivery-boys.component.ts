@@ -10,36 +10,34 @@ import { EasydealService } from 'src/app/_services/easydeal.service';
   styleUrls: ['./add-delivery-boys.component.css']
 })
 export class AddDeliveryBoysComponent implements OnInit {
-  deliveryboyFormRegistration:FormGroup;
+  deliveryboyFormRegistration: FormGroup;
   submitted = false;
-  
+
   dname;
   uname;
-  address; 
+  address;
   mobile;
   aadhar;
   password;
   isLoading = false;
   button = 'Submit';
-  location;
   locations:any = [];
-
-  
-  constructor(private formbuilder:FormBuilder,private easydeelservices:EasydealService,private router:Router,private toastr:ToastrService) { }
+  location;
+  constructor(private formbuilder: FormBuilder, private router:Router, private toastr:ToastrService,private easydeelservie:EasydealService) { }
 
   ngOnInit() {
-    this.deliveryboyFormRegistration= this.formbuilder.group(
+    this.deliveryboyFormRegistration = this.formbuilder.group(
       {
         dname: ['', Validators.required],
-        uname:['', Validators.required],
-        address:['', Validators.required],
-        mobile:['', Validators.required],
-        aadhar:['', Validators.required],
-        password:['', Validators.required],
+        uname: ['', Validators.required],
+        address: ['', Validators.required],
+        mobile: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
+        aadhar: ['', Validators.required],
+        password: ['', Validators.required],
         location: ['', Validators.required],
-      
-    })
-    this.getalllocations();
+
+      })
+      this.getalllocations();
   }
   get f() { return this.deliveryboyFormRegistration.controls; }
 
@@ -64,9 +62,9 @@ export class AddDeliveryBoysComponent implements OnInit {
         "aadhar_id": this.aadhar,
         "password": this.password,
         "locationId":this.location,
-        "state":"Active"
+     
       }
-      this.easydeelservices.adddeliveryboy(req).subscribe(
+      this.easydeelservie.adddeliveryboy(req).subscribe(
         data =>{
           this.toastr.success("Delivery Boy Added");
           this.router.navigate(['/deliveryboys']);
@@ -84,7 +82,7 @@ export class AddDeliveryBoysComponent implements OnInit {
     }
   }
   getalllocations(){
-    this.easydeelservices.getalllocations().subscribe(
+    this.easydeelservie.getalllocations().subscribe(
       data =>{
         console.log(data);
         this.locations = data;

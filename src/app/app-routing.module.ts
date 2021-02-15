@@ -6,12 +6,15 @@ import { EditCoursetypeComponent } from './coursetype/edit-coursetype/edit-cours
 import { AddGeneralCategoryComponent } from './general-category/add-general-category/add-general-category.component';
 import { EditGeneralCategoryComponent } from './general-category/edit-general-category/edit-general-category.component';
 import { GeneralCategoryComponent } from './general-category/general-category.component';
+import { AddmenuForApprovalComponent } from './home/approval-request/addmenu-for-approval/addmenu-for-approval.component';
 import { ApprovalRequestComponent } from './home/approval-request/approval-request.component';
+import { LocationAdminViewPendingrequestComponent } from './home/approval-request/location-admin-view-pendingrequest/location-admin-view-pendingrequest.component';
 import { MenuApprovalComponent } from './home/approval-request/menu-approval/menu-approval.component';
 import { AddCategoryComponent } from './home/category/add-category/add-category.component';
 import { EditCategoryComponent } from './home/category/edit-category/edit-category.component';
 import { AddDeliveryBoysComponent } from './home/delivery-boys/add-delivery-boys/add-delivery-boys.component';
 import { DeliveryBoysComponent } from './home/delivery-boys/delivery-boys.component';
+import { EditDeliveryBoysComponent } from './home/delivery-boys/edit-delivery-boys/edit-delivery-boys.component';
 import { AddGeneralMenuComponent } from './home/general-menu/add-general-menu/add-general-menu.component';
 import { EditGeneralMenuComponent } from './home/general-menu/edit-general-menu/edit-general-menu.component';
 import { GeneralMenuComponent } from './home/general-menu/general-menu.component';
@@ -21,6 +24,7 @@ import { GeneralShopMenuComponent } from './home/general-shop-menu/general-shop-
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { AddPincodesComponent } from './home/pincodes/add-pincodes/add-pincodes.component';
+import { EditPincodesComponent } from './home/pincodes/edit-pincodes/edit-pincodes.component';
 import { PincodesComponent } from './home/pincodes/pincodes.component';
 import { AddPreOrdersComponent } from './home/pre-orders/add-pre-orders/add-pre-orders.component';
 import { PreOrdersComponent } from './home/pre-orders/pre-orders.component';
@@ -49,13 +53,19 @@ import { EditAdminCredentialsComponent } from './settings/admin-credentials/edit
 import { AddChatBoxComponent } from './settings/chat-box/add-chat-box/add-chat-box.component';
 import { ChatBoxComponent } from './settings/chat-box/chat-box.component';
 import { EditChatBoxComponent } from './settings/chat-box/edit-chat-box/edit-chat-box.component';
+import { AddLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/add-location-admin-phonenumber/add-location-admin-phonenumber.component';
+import { EditLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/edit-location-admin-phonenumber/edit-location-admin-phonenumber.component';
+import { LocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/location-admin-phonenumber.component';
 import { MasteradminphonenumberComponent } from './settings/masteradminphonenumber/masteradminphonenumber.component';
 import { AddPriceUpdatorComponent } from './settings/price-updator/add-price-updator/add-price-updator.component';
 import { PriceUpdatorComponent } from './settings/price-updator/price-updator.component';
 import { SettingsComponent } from './settings/settings.component';
-import { AddShopCredentialsComponent } from './settings/shop-credentials/add-shop-credentials/add-shop-credentials.component';
-import { EditShopCredentialsComponent } from './settings/shop-credentials/edit-shop-credentials/edit-shop-credentials.component';
-import { ShopCredentialsComponent } from './settings/shop-credentials/shop-credentials.component';
+import { AddShopCredentialsComponent } from './settings/shopcredentials/add-shop-credentials/add-shop-credentials.component';
+import { EditShopCredentialsComponent } from './settings/shopcredentials/edit-shop-credentials/edit-shop-credentials.component';
+import { ShopcredentialsComponent } from './settings/shopcredentials/shopcredentials.component';
+import { AddUpiComponent } from './settings/upi/add-upi/add-upi.component';
+import { EditUpiComponent } from './settings/upi/edit-upi/edit-upi.component';
+import { UpiComponent } from './settings/upi/upi.component';
 import { WalletpointsComponent } from './settings/walletpoints/walletpoints.component';
 import { AddShopAdminMenuNameComponent } from './shop_admin_section/shop-admin-menu-name/add-shop-admin-menu-name/add-shop-admin-menu-name.component';
 import { ShopAdminMenuNameComponent } from './shop_admin_section/shop-admin-menu-name/shop-admin-menu-name.component';
@@ -64,9 +74,6 @@ import { ShopAdminOffersComponent } from './shop_admin_section/shop-admin-offers
 import { ShopAdminOrdersComponent } from './shop_admin_section/shop-admin-orders/shop-admin-orders.component';
 import { SalesReportComponent } from './shop_admin_section/shop-admin-reports/sales-report/sales-report.component';
 import { ShopAdminReportsComponent } from './shop_admin_section/shop-admin-reports/shop-admin-reports.component';
-import { AddTopDealsComponent } from './top-deals/add-top-deals/add-top-deals.component';
-import { EditTopDealsComponent } from './top-deals/edit-top-deals/edit-top-deals.component';
-import { TopDealsComponent } from './top-deals/top-deals.component';
 
 const routes: Routes = [
   {path:'',pathMatch:"full",redirectTo:"login"},
@@ -84,7 +91,9 @@ const routes: Routes = [
   {path:'deliveryboys',component:DeliveryBoysComponent},
   {path:'users',component:UsersComponent},
   {path:'addpincodes',component:AddPincodesComponent},
+  {path:'editpincodes',component:EditPincodesComponent},
   {path:'adddeliveryboys',component:AddDeliveryBoysComponent},
+  {path:'editdeliveryboys',component:EditDeliveryBoysComponent},
   {path:'generalmenu',component:GeneralMenuComponent},
   {path:'generalshopmenu',component:GeneralShopMenuComponent},
   {path:'addgeneralmenu',component:AddGeneralMenuComponent},
@@ -125,20 +134,23 @@ const routes: Routes = [
   {path:'edit-shop-menu',component:EditShopMenuComponent},
   {path:'edit-general-shop-menu',component:EditGeneralShopMenuComponent},
   {path:'edit-offers',component:EditOffersComponent},
-  {path:'shop-credentials',component:ShopCredentialsComponent},
-  {path:'add-shop-credentials',component:AddShopCredentialsComponent},
-  {path:'edit-shop-credentials',component:EditShopCredentialsComponent},
-  {path:'admin-credentials',component:AdminCredentialsComponent},
-  {path:'add-admin-credentials',component:AddAdminCredentialsComponent},
-  {path:'admin-credentials',component:EditAdminCredentialsComponent},
-  {path:'chat-box',component:ChatBoxComponent},
-  {path:'add-chat-box',component:AddChatBoxComponent},
-  {path:'edit-chat-box',component:EditChatBoxComponent},
-
-
-
-
-
+  {path:'shopcredentials',component:ShopcredentialsComponent},
+  {path:'addshopcredentials',component:AddShopCredentialsComponent},
+  {path:'editshopcredentials',component:EditShopCredentialsComponent},
+  {path:'chatbox',component:ChatBoxComponent},
+  {path:'addchatbox',component:AddChatBoxComponent},
+  {path:'editchatbox',component:EditChatBoxComponent},
+  {path:'admincredentials',component:AdminCredentialsComponent},
+  {path:'addadmincredentials',component:AddAdminCredentialsComponent},
+  {path:'editadmincredentials',component:EditAdminCredentialsComponent},
+  {path:'upi',component:UpiComponent},
+  {path:'addupi',component:AddUpiComponent},
+  {path:'editupi',component:EditUpiComponent},
+  {path:'locationadminviewrequest',component:LocationAdminViewPendingrequestComponent},
+  {path:'addmenuforapproval',component:AddmenuForApprovalComponent},
+  {path:'locationadminphonenumber',component:LocationAdminPhonenumberComponent},
+  {path:'addlocationadminphonenumber',component:AddLocationAdminPhonenumberComponent},
+  {path:'editlocationadminphonenumber',component:EditLocationAdminPhonenumberComponent},
 
 ];
 

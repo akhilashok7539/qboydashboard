@@ -42,6 +42,8 @@ export class EditShopMenuComponent implements OnInit {
   shopid;
   profitrate;
   pperct;
+  loginstatus;
+  userdetails;
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService, private router: Router, private ToastrService: ToastrService) { }
 
   ngOnInit() {
@@ -52,7 +54,7 @@ export class EditShopMenuComponent implements OnInit {
         mname: ['', Validators.required],
         mdes: ['', [Validators.required, Validators.maxLength(50)]],
         prate: ['',],
-        pperct: ['', Validators.required],
+        // pperct: [''],
         srate: ['', Validators.required],
         dperc: ['', Validators.required],
         damount: ['', Validators.required],
@@ -80,6 +82,8 @@ export class EditShopMenuComponent implements OnInit {
 
     this.id = this.shopmenu['_id'];
 // this.shopid = this.shopmenu['shop_id']._id;
+this.loginstatus = JSON.parse(localStorage.getItem("loginstatus"));
+this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.getshopprofitbypercetage();
 
     this.getallShop();
@@ -193,29 +197,45 @@ export class EditShopMenuComponent implements OnInit {
 
   }
   getallShop() {
-    this.easydealservice.getallshopmappedtorestaurant().subscribe(
-      data => {
-        console.log(data);
-        // this.shops = data;
-        this.restmenus=data;
-        for(let i=0;i<this.restmenus.length;i++)
-        {
-          if(this.restmenus[i].category_id==null)
+    if (this.loginstatus == 'masteradmin') {
+      this.easydealservice.getallshopmappedtorestaurant().subscribe(
+        data => {
+          console.log(data);
+          // this.shops = data;
+          this.restmenus=data;
+          for(let i=0;i<this.restmenus.length;i++)
           {
-
+            if(this.restmenus[i].category_id==null)
+            {
+  
+            }
+            else
+            {
+              
+              this.shops.push(this.restmenus[i])
+            }
           }
-          else
-          {
-            
-            this.shops.push(this.restmenus[i])
-          }
+          // this.dataSource.data = this.results;
+        },
+        error => {
+          console.log(error);
         }
-        // this.dataSource.data = this.results;
-      },
-      error => {
-        console.log(error);
-      }
-    )
+      )
+    }
+    if (this.loginstatus == 'locationamin') {
+      let ud = this.userdetails['locationId']._id;
+      this.easydealservice.getallshopsbylocation(ud).subscribe(
+        data =>{
+          console.log(data);
+         this.shops =data;
+          // this.dataSource.data = this.results;
+        },
+        error =>{
+  
+        }
+      )
+    }
+    
   }
   getalllocations() {
     this.easydealservice.getalllocations().subscribe(
@@ -260,16 +280,15 @@ export class EditShopMenuComponent implements OnInit {
       }
     )
   }
-  calculateshopprofitpercentage()
-  {
+  calculateshopprofitpercentage() {
     let ppcaluate;
     let number = 100;
-    let res = (this.profitpercenatge/number)+1;
-    this.profitrate = this.srate/res;
-    console.log("profitrate ",this.profitrate);
+    let res = (this.profitpercenatge / number);
+    let res2 = (this.srate*res);
+    let profitrate = this.srate - res2;
+    this.prate = profitrate.toFixed();
+    console.log(this.prate);
 
-    // this.prate = profitrate.toFixed();
-    // console.log(this.prate);
-    
   }
+
 }

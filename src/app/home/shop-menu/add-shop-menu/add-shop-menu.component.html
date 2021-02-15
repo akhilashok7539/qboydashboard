@@ -58,7 +58,14 @@
                         <div *ngIf="f.mname.errors.required">Menu name is required</div>
 
                     </div>
+
+                    <!-- <input type="text" placeholder="Search for a street" [formControl]="control" [matAutocomplete]="auto"> -->
+
+
+
                 </div>
+
+
                 <!-- <div class="col-sm-12">
                     <label for=""> Choose Locations</label>
                     <div class="row" style="padding: 15px;">
@@ -93,14 +100,14 @@
                 </div>
 
 
-                <div class="col-sm-4">
+                <!-- <div class="col-sm-4">
                     <label for="">Purchase Percentage</label>
                     <input type="text" class="form-control" placeholder="Enter the Purchase Percentage" [(ngModel)]="pperct" [ngClass]="{ 'is-invalid': submitted && f.pperct.errors }" formControlName="pperct">
 
                     <div *ngIf="submitted && f.mdes.errors" class="invalid-feedback">
                         <div *ngIf="f.pperct.errors.required">Purchase Percentageis required</div>
                     </div>
-                </div>
+                </div> -->
 
                 <div class="col-sm-4">
                     <label for="">Sales Rate </label>

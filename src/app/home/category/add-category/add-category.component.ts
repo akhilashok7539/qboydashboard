@@ -31,7 +31,6 @@ export class AddCategoryComponent implements OnInit {
   // mtype="";
   // mctype="";
   // mstyle="";
-  listtype="Grid";
   formData = new FormData();
   isLoading = false;
   button = 'Submit';
@@ -61,7 +60,6 @@ isvalidphoto = false;
         // mctype: ['', Validators.required],
         // mstyle: ['', Validators.required],
         check: ['', Validators.required],
-        listtype:['', Validators.required],
         checkeddays: this.formbuilder.array([]),
     })
     this.getalllocations();
@@ -82,33 +80,40 @@ get f() { return this.categoryFormRegistration.controls; }
       if(this.isvalidphoto == false)
       {
         this.isLoading = true;
-      this.button = 'Processing';
-      this.formData.append("category_name",this.cname.toUpperCase( ))
-      this.formData.append("show",this.showorhide)
-      this.formData.append("category_menutype",this.mtype)
-      this.formData.append("state",this.status)
-      this.formData.append("cat_img",this.currentphoto)
-     this.easydealservice.addcategory(this.formData).subscribe(
-       data=>{
-        this.isLoading = false;
-        this.button = 'Submit';
-        console.log(data);
-        this.toaster.success("Category Added Successfully")
-        this.formData.delete;
-        this.router.navigate(['/home']);
-       },
-       error=>{
-        this.isLoading = false;
-        this.button = 'Submit';
-        let err = error.error['responce'];
-        this.toaster.error(err);
-
-         console.log(error);
-        this.formData.delete;
+        this.button = 'Processing';
+        this.formData.append("category_name",this.cname.toUpperCase( ))
+        this.formData.append("show",this.showorhide)
+        this.formData.append("category_menutype",this.mtype)
+        this.formData.append("state",this.status)
+        this.formData.append("cat_img",this.currentphoto)
+        for (let i = 0; i < this.sessiondayssRepat.length; i++) {
+          this.formData.append("locationId", this.sessiondayssRepat[i])
+  
+        }
+  
+  
+       this.easydealservice.addcategory(this.formData).subscribe(
+         data=>{
+          this.isLoading = false;
+          this.button = 'Submit';
+          console.log(data);
+          this.toaster.success("Category Added Successfully")
+          this.formData.delete;
+          this.router.navigate(['/home']);
+          window.location.reload();
+                 },
+         error=>{
+          this.isLoading = false;
+          this.button = 'Submit';
+          let err = error.error['responce'];
+          this.toaster.error(err);
+  
+           console.log(error);
+          this.formData.delete;
+           
+         }
          
-       }
-       
-     )
+       )
       }
       else 
       {
@@ -116,6 +121,7 @@ get f() { return this.categoryFormRegistration.controls; }
         this.button = 'Submit';
         this.toaster.error('photo should be 1000*554 size');
       }
+      
       
 
     }
@@ -160,44 +166,50 @@ get f() { return this.categoryFormRegistration.controls; }
       }
     )
   }
+  // addcategoryimage(event) {
+
+  //   this.files = event.target.files;
+  //   this.currentphoto = this.files.item(0);
+    
+  // }
   addcategoryimage(event) {
-    this.isvalidphoto = true;
     this.files = event.target.files;
+
     this.currentphoto = this.files.item(0);
-    window.URL = window.URL;
+
+    // this.isvalidphoto = true;
+    // window.URL = window.URL;
     
     
-    let reader = new FileReader();
-    if (event.target.files && event.target.files.length > 0) {
-      this.files = event.target.files[0];
+    // let reader = new FileReader();
+    // if (event.target.files && event.target.files.length > 0) {
+    //   this.files = event.target.files[0];
     
-      let img = new Image();
+    //   let img = new Image();
     
-      img.src = window.URL.createObjectURL( this.files );
-      reader.readAsDataURL(this.files);
-      reader.onload = () => {
-        setTimeout(() => {
-          const width = img.naturalWidth;
-          const height = img.naturalHeight;
+    //   img.src = window.URL.createObjectURL( this.files );
+    //   reader.readAsDataURL(this.files);
+    //   reader.onload = () => {
+    //     setTimeout(() => {
+    //       const width = img.naturalWidth;
+    //       const height = img.naturalHeight;
     
-          window.URL.revokeObjectURL( img.src );
-          console.log(width + '*' + height);
-          if ( width !== 223 && height !== 280) {
-            console.log(width,height)
-            this.isvalidphoto = true;
-            this.toaster.error('photo should be 223*280 size');
+    //       window.URL.revokeObjectURL( img.src );
+    //       console.log(width + '*' + height);
+    //       if ( width !== 1000 && height !== 554) {
+    //         this.isvalidphoto = true;
+    //           console.log(width,height)
+    //         this.toaster.error('photo should be 1000*554 size');
             
-            // form.reset();
-          } else {
-            this.isvalidphoto = false;
-              console.log(width,height)
-            // this.imgURL = reader.result;
-         
+    //       } else {
+    //         this.isvalidphoto = false;
+    //           console.log(width,height)
+    //         this.currentphoto = this.files.item(0);
           
-          }
-        }, 1000);
-          };
-      }
+    //       }
+    //     }, 2000);
+    //       };
+    //   }
       }
     
 }

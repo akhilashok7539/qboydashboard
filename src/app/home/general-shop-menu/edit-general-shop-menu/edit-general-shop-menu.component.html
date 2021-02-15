@@ -11,7 +11,7 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <h4 class="page-title"> Add General Shop Menu</h4>
+                <h4 class="page-title"> Edit General Shop Menu</h4>
 
             </div>
         </div>
@@ -21,7 +21,7 @@
                 <div class="col-sm-4">
                     <label for=""> Shop Name</label>
 
-                    <select name="" id="" class="form-control" [(ngModel)]="sname" [ngClass]="{ 'is-invalid': submitted && f.sname.errors }" formControlName="sname">
+                    <select name="" id="" class="form-control" [(ngModel)]="sname" (change)="shopselcted(sname)" [ngClass]="{ 'is-invalid': submitted && f.sname.errors }" formControlName="sname">
                         <option value="" disabled selected>Choose a option </option>
                         <option *ngFor="let s of results" value="{{s._id}}" >{{s.shop_name}}</option>
                     </select>

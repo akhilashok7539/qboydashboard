@@ -10,7 +10,7 @@ import { EasydealService } from 'src/app/_services/easydeal.service';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  displayedColumns = ['image', 'shopname','menutype', 'categoryname', 'phonenumber','deliverytime','status','action'];
+  displayedColumns = ['image', 'shopname', 'categoryname', 'phonenumber','status','action'];
   dataSource = new MatTableDataSource();
 
   // @ViewChild(MatSort) sort: MatSort;
@@ -18,6 +18,9 @@ export class ShopComponent implements OnInit {
   options: any = "";
   results: any=[];
   apiUrl;
+  loginstatus:any;
+  locationid;
+  userdetails;
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;
     
@@ -28,23 +31,58 @@ export class ShopComponent implements OnInit {
   constructor(private easydealservice:EasydealService,private router:Router,) { }
 
   ngOnInit() {
-    this.apiUrl="https://qboy.in/";
+    this.loginstatus = JSON.parse(localStorage.getItem("loginstatus"))
+     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    console.log(this.userdetails);
+    
+
+    this.apiUrl="https://shopgi.in/";
     this.getallShop();
   }
   getallShop(){
-    this.easydealservice.getshop().subscribe(
+
+    if(this.loginstatus =='masteradmin')
+    {
+      this.easydealservice.getshop().subscribe(
+        data =>{
+          console.log(data);
+          this.results =data;
+          this.dataSource.data = this.results;
+        },
+        error =>{
+          console.log(error);
+        }
+      )
+    }
+    else if(this.loginstatus == 'locationamin')   
+    {
+      this.locationid=this.userdetails['locationId']._id;
+      console.log(this.locationid);
+
+    this.easydealservice.getallshopsbylocation(this.locationid).subscribe(
       data =>{
         console.log(data);
         this.results =data;
         this.dataSource.data = this.results;
       },
       error =>{
-        console.log(error);
+
       }
     )
+      
+    }
+    else if(this.loginstatus =='shopadmin')
+    {
+
+    }
+    
   }
   
-
+  applyFilter(filterValue: string) {
+    filterValue = filterValue.trim(); // Remove whitespace
+    filterValue = filterValue.toLowerCase(); // MatTableDataSource defaults to lowercase matches
+    this.dataSource.filter = filterValue;
+  }
   selectedevent(s) {
     console.log(s);
     if (s == "s") {

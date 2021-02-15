@@ -1,2 +1,2 @@
-# Qboy-AdminPanel
-Qboy AdminPanel
+# Qboy
+AdminPanel
