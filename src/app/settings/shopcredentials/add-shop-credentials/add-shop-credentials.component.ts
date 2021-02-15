@@ -61,7 +61,7 @@ export class AddShopCredentialsComponent implements OnInit {
         }
         this.eaydeelservice.addlocationadmin(req).subscribe(
           data =>{
-              this.router.navigate(['/shopcredentials'])
+              this.router.navigate(['/shop-credentials'])
           },
           error =>{
 

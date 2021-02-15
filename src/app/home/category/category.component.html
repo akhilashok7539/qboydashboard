@@ -16,7 +16,7 @@
             </div>
             <div class="col-sm-4">
 
-                <button *ngIf="status =='masteradmin'" class="btn btn-primary" style="float: right;" routerLink="/addcategory"> Add Main Category</button>
+                <button *ngIf="status =='masteradmin'" class="btn btn-danger" style="float: right;" routerLink="/addcategory"> Add Main Category</button>
             </div>
             <div class="col-sm-5">
                 <input type="text" class="form-control" placeholder="search here" (keyup)="applyFilter($event.target.value)">

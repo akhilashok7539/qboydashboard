@@ -39,7 +39,7 @@ export class EditUpiComponent implements OnInit {
     this.upi = this.upidetails['upi']
   }
   get f() { return this.editupicredentialsFormRegistration.controls; }
-
+  
   submit() {
     this.submitted = true;
     this.isLoading = true;

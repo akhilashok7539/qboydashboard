@@ -5,17 +5,15 @@ import { ToastrService } from 'ngx-toastr';
 import { EasydealService } from 'src/app/_services/easydeal.service';
 
 @Component({
-  selector: 'app-edit-offers',
-  templateUrl: './edit-offers.component.html',
-  styleUrls: ['./edit-offers.component.css']
+  selector: 'app-add-top-deals',
+  templateUrl: './add-top-deals.component.html',
+  styleUrls: ['./add-top-deals.component.css']
 })
-export class EditOffersComponent implements OnInit {
+export class AddTopDealsComponent implements OnInit {
 
-
-  offerFormRegistration: FormGroup;
+  edittopdealsFormRegistration: FormGroup;
   submitted = false;
-  results: any = [];
-  location;
+
   sname = '';
   mname;
   oloc = '';
@@ -32,103 +30,75 @@ export class EditOffersComponent implements OnInit {
   formData = new FormData();
   files;
   currentphoto;
-  offer;
-  id;
+  results: any=[];
+  location;
   isLoading = false;
-  button = 'Submit';
   pprice;
-  otmethod = 'Offers';
-
-  constructor(private formbuilder: FormBuilder,
-    private easydeelservice: EasydealService,
-    private toaster: ToastrService, private router: Router) { }
+  button = 'Submit';
+  constructor(private formbuilder: FormBuilder, private easydeelservice: EasydealService, private toaster: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    this.getallShop();
-    this.getalllocations();
-    this.offerFormRegistration = this.formbuilder.group(
+    this.edittopdealsFormRegistration = this.formbuilder.group(
       {
 
         sname: ['', Validators.required],
-        mname: ['', Validators.required],
+        mname: [''],
         oloc: ['', Validators.required],
         odes: ['', Validators.required],
         tqpurc: ['', Validators.required],
         tnusers: ['', Validators.required],
         oprice: ['', Validators.required],
         aprice: ['', Validators.required],
+        pprice: ['', Validators.required],
         adata: ['', Validators.required],
         atime: ['', Validators.required],
-        pprice: ['', Validators.required],
         ctime: ['', Validators.required],
         cashback: ['', Validators.required],
         bimages: ['', Validators.required],
       })
-      if(this.otmethod =='Offers')
-      {
-        this.offerFormRegistration.get('tqpurc').disable();
-        this.offerFormRegistration.get('tnusers').disable();
-    
-      }
-
-    this.offer = JSON.parse(sessionStorage.getItem("offer"));
-    this.id = this.offer['_id'];
-    console.log(this.id);
-
-    this.sname = this.offer.shop_id['_id'];
-    this.mname = this.offer['menu_name'];
-    this.oloc = this.offer.location_id['_id'];
-    this.odes = this.offer['offr_desc'];
-    this.tqpurc = this.offer['total_qnty'];
-    this.tnusers = this.offer['No_users'];
-    this.oprice = this.offer['offr_price'];
-    this.aprice = this.offer['actual_price'];
-    this.adata = this.offer['av_date'];
-    this.atime = this.offer['av_time'];
-    this.cashback = this.offer['cashback'];
-    this.ctime = this.offer['clos_time'];
-
-
+      this.getallShop();
+      this.getalllocations();
   }
-  getallShop() {
-    this.easydeelservice.getshop().subscribe(
-      data => {
-        console.log(data);
-        this.results = data;
-
-      },
-      error => {
-        console.log(error);
-      }
-    )
-  }
-  getalllocations() {
-    this.easydeelservice.getalllocations().subscribe(
-      data => {
-        console.log(data);
-
-        this.location = data;
-
-
-      },
-      error => {
-        console.log(error);
-
-      }
-    )
-  }
-  get f() { return this.offerFormRegistration.controls; }
+  get f() { return this.edittopdealsFormRegistration.controls; }
   addimg(event) {
 
     this.files = event.target.files;
     this.currentphoto = this.files.item(0);
   }
+  getallShop(){
+    this.easydeelservice.getshop().subscribe(
+      data =>{
+        console.log(data);
+        this.results =data;
+     
+      },
+      error =>{
+        console.log(error);
+      }
+    )
+  }
+  getalllocations(){
+    this.easydeelservice.getalllocations().subscribe(
+      data =>{
+        console.log(data);
+    
+        this.location = data;
+     
+        
+      },
+      error =>{
+        console.log(error);
+        
+      }
+    )
+  }
   submit() {
     this.submitted = true;
     this.isLoading = true;
     this.button = 'Processing';
+
     // stop here if form is invalid
-    if (this.offerFormRegistration.invalid) {
+    if (this.edittopdealsFormRegistration.invalid) {
       return;
     }
     else {
@@ -148,8 +118,7 @@ export class EditOffersComponent implements OnInit {
       this.formData.append("cashback", this.cashback);
       this.formData.append("offer_img", this.currentphoto);
 
-
-      this.easydeelservice.editoffer(this.formData, this.id).subscribe(
+      this.easydeelservice.addoffer(this.formData).subscribe(
         data => {
           this.isLoading = false;
           this.button = 'Submit';
@@ -165,29 +134,5 @@ export class EditOffersComponent implements OnInit {
 
     }
   }
-  topdealsoroffers(otmethod)
-{
-  console.log(otmethod);
-  if(this.otmethod =='Offers')
-  {
-    this.offerFormRegistration.get('tqpurc').disable();
-    this.offerFormRegistration.get('tnusers').disable();
 
-  }
-  else{
-    this.offerFormRegistration.get('tqpurc').enable();
-    this.offerFormRegistration.get('tnusers').enable();
-  }
-
-
-  if(this.otmethod =='Top Deals')
-  {
-    this.offerFormRegistration.get('cashback').disable();
-  }
- else{
-  this.offerFormRegistration.get('cashback').enable();
-
- }
-
-}
 }

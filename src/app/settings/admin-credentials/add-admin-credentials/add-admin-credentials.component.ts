@@ -28,65 +28,65 @@ export class AddAdminCredentialsComponent implements OnInit {
 
   ngOnInit() {
     this.addadmincredentialsFormRegistration= this.formbuilder.group(
-    {
-      
-      emailusername: ['', Validators.required],
-      password: ['', Validators.required],
-      location: ['', Validators.required],
-      
-    })
-    this.getalllocations();
-  }
-  get f() { return this.addadmincredentialsFormRegistration.controls; }
-  getalllocations(){
-    this.eaydeelservice.getalllocations().subscribe(
-      data =>{
-        console.log(data);
-        this.result= data;
-  
+      {
         
-      },
-      error =>{
-        console.log(error);
+        emailusername: ['', Validators.required],
+        password: ['', Validators.required],
+        location: ['', Validators.required],
         
-      }
-    )
-  }
-    submit() {
-     
-        this.submitted = true;
-        this.isLoading = true;
-        this.button = 'Processing';
-  
-      // stop here if form is invalid
-      if (this.addadmincredentialsFormRegistration.invalid) {
-      
-          this.isLoading = false;
-          this.button = 'submit';
-          return;
-        }
-        else {
+      })
+      this.getalllocations();
+    }
+    get f() { return this.addadmincredentialsFormRegistration.controls; }
+    getalllocations(){
+      this.eaydeelservice.getalllocations().subscribe(
+        data =>{
+          console.log(data);
+          this.result= data;
+    
           
+        },
+        error =>{
+          console.log(error);
+          
+        }
+      )
+    }
+      submit() {
+       
+          this.submitted = true;
           this.isLoading = true;
           this.button = 'Processing';
-          let req = {
-            "userName":this.emailusername,
-            "phoneNumber":"123456789",
-            "password":this.password,
-            "locationId":this.location,
-            "role":2
+    
+        // stop here if form is invalid
+        if (this.addadmincredentialsFormRegistration.invalid) {
+        
+            this.isLoading = false;
+            this.button = 'submit';
+            return;
           }
-          this.eaydeelservice.addlocationadmin(req).subscribe(
-            data =>{
-                this.router.navigate(['/admincredentials'])
-            },
-            error =>{
-
+          else {
+            
+            this.isLoading = true;
+            this.button = 'Processing';
+            let req = {
+              "userName":this.emailusername,
+              "phoneNumber":"123456789",
+              "password":this.password,
+              "locationId":this.location,
+              "role":2
             }
-          )
-          
+            this.eaydeelservice.addlocationadmin(req).subscribe(
+              data =>{
+                  this.router.navigate(['/admin-credentials'])
+              },
+              error =>{
+  
+              }
+            )
+            
+        }
+       
       }
-     
-    }
-
-}
+  
+  }

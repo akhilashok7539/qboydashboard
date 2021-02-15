@@ -11,21 +11,12 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <h4 class="page-title"> Add Offers / Top Deals</h4>
+                <h4 class="page-title"> Add Top Deals</h4>
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label>
-            Choose a method 
-        </label><br> Offers
-                <input type="radio" value="Offers" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)"> Top Deals
-                <input type="radio" value="Top" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)">
-            </div>
-        </div>
 
-        <form [formGroup]="offerFormRegistration">
+        <form [formGroup]="edittopdealsFormRegistration">
 
             <div class="row">
 
@@ -44,12 +35,12 @@
 
                 <div class="col-sm-4">
                     <label for=""> Menu Name</label>
-                    <input type="text" class="form-control" placeholder="Enter Your Menu Name" [(ngModel)]="mname" [ngClass]="{ 'is-invalid': submitted && f.mname.errors }" formControlName="mname">
+                    <input type="text" class="form-control" placeholder="Enter Your Menu Name" [(ngModel)]="mname" formControlName="mname">
 
-                    <div *ngIf="submitted && f.mname.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.mname.errors" class="invalid-feedback">
                         <div *ngIf="f.mname.errors.required">Menu name is required</div>
 
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-sm-4">
@@ -166,27 +157,17 @@
 
 
 
-                <div class="col-sm-4" *ngIf="otmethod =='Offers'">
-                    <label for="">Banner Image </label>
+                <div class="col-sm-4">
+                    <label for="">Banner Images </label>
                     <!-- <input type="file" class="form-control" placeholder="Enter Your Banner Images" [(ngModel)]="bimages" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages"> -->
                     <input class="form-control" #file type="file" (change)="addimg($event)" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages">
 
                     <div *ngIf="submitted && f.bimages.errors" class="invalid-feedback">
-                        <div *ngIf="f.bimages.errors.required">Banner image is required</div>
+                        <div *ngIf="f.bimages.errors.required">Banner images is required</div>
 
                     </div>
                 </div>
 
-                <div class="col-sm-4" *ngIf="otmethod =='Top Deals'">
-                    <label for="">Top Deal Image </label>
-                    <!-- <input type="file" class="form-control" placeholder="Enter Your Banner Images" [(ngModel)]="bimages" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages"> -->
-                    <input class="form-control" #file type="file" (change)="addimg($event)" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages">
-
-                    <div *ngIf="submitted && f.bimages.errors" class="invalid-feedback">
-                        <div *ngIf="f.bimages.errors.required">Top Deal image is required</div>
-
-                    </div>
-                </div>
                 <!-- 
                 <div class="col-sm-4">
                     <label for="">Show / Hide</label>

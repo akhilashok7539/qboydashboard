@@ -11,21 +11,12 @@
 
         <div class="row">
             <div class="col-sm-8">
-                <h4 class="page-title"> Add Offers / Top Deals</h4>
+                <h4 class="page-title"> Edit Top Deals</h4>
 
             </div>
         </div>
-        <div class="row">
-            <div class="col-sm-6">
-                <label>
-            Choose a method 
-        </label><br> Offers
-                <input type="radio" value="Offers" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)"> Top Deals
-                <input type="radio" value="Top" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)">
-            </div>
-        </div>
 
-        <form [formGroup]="offerFormRegistration">
+        <form [formGroup]="edittopdealFormRegistration">
 
             <div class="row">
 
@@ -44,12 +35,12 @@
 
                 <div class="col-sm-4">
                     <label for=""> Menu Name</label>
-                    <input type="text" class="form-control" placeholder="Enter Your Menu Name" [(ngModel)]="mname" [ngClass]="{ 'is-invalid': submitted && f.mname.errors }" formControlName="mname">
+                    <input type="text" class="form-control" placeholder="Enter Your Menu Name" [(ngModel)]="mname" formControlName="mname">
 
-                    <div *ngIf="submitted && f.mname.errors" class="invalid-feedback">
+                    <!-- <div *ngIf="submitted && f.mname.errors" class="invalid-feedback">
                         <div *ngIf="f.mname.errors.required">Menu name is required</div>
 
-                    </div>
+                    </div> -->
                 </div>
 
                 <div class="col-sm-4">
@@ -64,7 +55,15 @@
                     </div>
                 </div>
 
+                <div class="col-sm-4">
+                    <label for="">Purchase Price </label>
+                    <input type="number" class="form-control" placeholder="Enter Your Purchase Price" [(ngModel)]="pprice" [ngClass]="{ 'is-invalid': submitted && f.pprice.errors }" formControlName="pprice">
 
+                    <div *ngIf="submitted && f.pprice.errors" class="invalid-feedback">
+                        <div *ngIf="f.pprice.errors.required">Purchase price is required</div>
+
+                    </div>
+                </div>
                 <div class="col-sm-4">
                     <label for="">Offer Description </label>
                     <input type="text" class="form-control" placeholder="Enter the Offer Description" [(ngModel)]="odes" [ngClass]="{ 'is-invalid': submitted && f.odes.errors }" formControlName="odes">
@@ -86,11 +85,11 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <label for="">No of Quantity Per User </label>
-                    <input type="number" class="form-control" placeholder="Enter the No of Quantity Per User   " [(ngModel)]="tnusers" [ngClass]="{ 'is-invalid': submitted && f.tnusers.errors }" formControlName="tnusers">
+                    <label for="">Total No of Users </label>
+                    <input type="number" class="form-control" placeholder="Enter the Total No of Users  " [(ngModel)]="tnusers" [ngClass]="{ 'is-invalid': submitted && f.tnusers.errors }" formControlName="tnusers">
 
                     <div *ngIf="submitted && f.tnusers.errors" class="invalid-feedback">
-                        <div *ngIf="f.tnusers.errors.required">No of Quantity Per User </div>
+                        <div *ngIf="f.tnusers.errors.required">Total no of users is required</div>
 
                     </div>
                 </div>
@@ -115,15 +114,7 @@
 
                     </div>
                 </div>
-                <div class="col-sm-4">
-                    <label for="">Purchase Price </label>
-                    <input type="number" class="form-control" placeholder="Enter Your Purchase Price" [(ngModel)]="pprice" [ngClass]="{ 'is-invalid': submitted && f.pprice.errors }" formControlName="pprice">
 
-                    <div *ngIf="submitted && f.pprice.errors" class="invalid-feedback">
-                        <div *ngIf="f.pprice.errors.required">Purchase price is required</div>
-
-                    </div>
-                </div>
                 <div class="col-sm-4">
                     <label for="">Available Date </label>
                     <input type="date" class="form-control" placeholder="Enter Your Available Date" [(ngModel)]="adata" [ngClass]="{ 'is-invalid': submitted && f.adata.errors }" formControlName="adata">
@@ -166,28 +157,18 @@
 
 
 
-                <div class="col-sm-4" *ngIf="otmethod =='Offers'">
-                    <label for="">Banner Image </label>
+                <div class="col-sm-4">
+                    <label for="">Banner Images </label>
                     <!-- <input type="file" class="form-control" placeholder="Enter Your Banner Images" [(ngModel)]="bimages" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages"> -->
                     <input class="form-control" #file type="file" (change)="addimg($event)" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages">
 
                     <div *ngIf="submitted && f.bimages.errors" class="invalid-feedback">
-                        <div *ngIf="f.bimages.errors.required">Banner image is required</div>
-
-                    </div>
-                </div>
-
-                <div class="col-sm-4" *ngIf="otmethod =='Top Deals'">
-                    <label for="">Top Deal Image </label>
-                    <!-- <input type="file" class="form-control" placeholder="Enter Your Banner Images" [(ngModel)]="bimages" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages"> -->
-                    <input class="form-control" #file type="file" (change)="addimg($event)" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages">
-
-                    <div *ngIf="submitted && f.bimages.errors" class="invalid-feedback">
-                        <div *ngIf="f.bimages.errors.required">Top Deal image is required</div>
+                        <div *ngIf="f.bimages.errors.required">Banner images is required</div>
 
                     </div>
                 </div>
                 <!-- 
+
                 <div class="col-sm-4">
                     <label for="">Show / Hide</label>
                     <br> show
@@ -206,8 +187,8 @@
                 <div class="col-sm-12">
                     <!-- <button class="btn btn-warning" (click)="submit()">SUBMIT</button> -->
                     <button class="btn btn-warning" (click)="submit()" [disabled]="isLoading"><i class="fa"
-                            [ngClass]="{' fa-spinner fa-spin': isLoading, 'fa-check': !isLoading}"></i>
-                        {{button}}</button>
+                        [ngClass]="{' fa-spinner fa-spin': isLoading, 'fa-check': !isLoading}"></i>
+                    {{button}}</button>
                 </div>
 
             </div>

@@ -13,7 +13,7 @@ export class AddLocationAdminPhonenumberComponent implements OnInit {
   addlocationadminphonenumberformregistration: FormGroup;
   submitted = false;
 
-  location ="";
+  location="";
   aphn;
   isLoading = false;
   button = 'Submit';

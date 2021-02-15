@@ -134,23 +134,24 @@ const routes: Routes = [
   {path:'edit-shop-menu',component:EditShopMenuComponent},
   {path:'edit-general-shop-menu',component:EditGeneralShopMenuComponent},
   {path:'edit-offers',component:EditOffersComponent},
-  {path:'shopcredentials',component:ShopcredentialsComponent},
-  {path:'addshopcredentials',component:AddShopCredentialsComponent},
-  {path:'editshopcredentials',component:EditShopCredentialsComponent},
-  {path:'chatbox',component:ChatBoxComponent},
-  {path:'addchatbox',component:AddChatBoxComponent},
-  {path:'editchatbox',component:EditChatBoxComponent},
-  {path:'admincredentials',component:AdminCredentialsComponent},
-  {path:'addadmincredentials',component:AddAdminCredentialsComponent},
-  {path:'editadmincredentials',component:EditAdminCredentialsComponent},
+  {path:'shop-credentials',component:ShopcredentialsComponent},
+  {path:'add-shop-credentials',component:AddShopCredentialsComponent},
+  {path:'edit-shop-credentials',component:EditShopCredentialsComponent},
+  {path:'admin-credentials',component:AdminCredentialsComponent},
+  {path:'add-admin-credentials',component:AddAdminCredentialsComponent},
+  {path:'admin-credentials',component:EditAdminCredentialsComponent},
+  {path:'chat-box',component:ChatBoxComponent},
+  {path:'add-chat-box',component:AddChatBoxComponent},
+  {path:'edit-chat-box',component:EditChatBoxComponent},
   {path:'upi',component:UpiComponent},
   {path:'addupi',component:AddUpiComponent},
   {path:'editupi',component:EditUpiComponent},
-  {path:'locationadminviewrequest',component:LocationAdminViewPendingrequestComponent},
-  {path:'addmenuforapproval',component:AddmenuForApprovalComponent},
   {path:'locationadminphonenumber',component:LocationAdminPhonenumberComponent},
   {path:'addlocationadminphonenumber',component:AddLocationAdminPhonenumberComponent},
   {path:'editlocationadminphonenumber',component:EditLocationAdminPhonenumberComponent},
+ 
+
+
 
 ];
 

@@ -36,7 +36,6 @@ export class AddUpiComponent implements OnInit {
     this.getalllocations();
   }
   get f() { return this.addupicredentialsFormRegistration.controls; }
-
     submit() {
       this.submitted = true;
   this.isLoading = true;

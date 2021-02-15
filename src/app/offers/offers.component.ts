@@ -16,9 +16,6 @@ export class OffersComponent implements OnInit {
   dataSource = new MatTableDataSource();
   results;
   apiurl;
-  status;
-  userdetails;
-  locationid;
   // @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   ngAfterViewInit() {
@@ -29,19 +26,13 @@ export class OffersComponent implements OnInit {
   constructor( private easydeelservice: EasydealService, private toaster: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    this.apiurl="https://shopgi.in/";
-    this.status = JSON.parse(localStorage.getItem("loginstatus"));
-
-    this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
+    this.apiurl="https://qboy.in/";
     this.getalloffers();
-    console.log(status);
+
   }
 
   getalloffers()
   {
-    
-    if(this.status =='masteradmin')
-    {
     this.easydeelservice.getalloffers().subscribe(
       data =>{
        
@@ -52,26 +43,6 @@ export class OffersComponent implements OnInit {
 
       }
     )
-  }
-    else if(this.status == 'locationamin')   
-    {
-      this.locationid=this.userdetails['locationId']._id;
-      console.log(this.locationid);
-      this.easydeelservice.getalloffersybylocation(this.locationid).subscribe(
-        data =>{
-         
-          this.results = data;
-          this.dataSource.data = this.results;
-        },
-        error =>{
-  
-        }
-      )
-    }
-    else if(this.status =='shopadmin')
-    {
-
-    }
   }
   edit(a)
   {

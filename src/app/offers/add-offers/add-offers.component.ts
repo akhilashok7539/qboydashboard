@@ -15,7 +15,7 @@ export class AddOffersComponent implements OnInit {
   submitted = false;
 
   sname = '';
-  mname;
+  mname = '';
   oloc = '';
   odes;
   tqpurc;
@@ -30,16 +30,13 @@ export class AddOffersComponent implements OnInit {
   formData = new FormData();
   files;
   currentphoto;
-  results: any=[];
+  results: any = [];
   location;
   isLoading = false;
   pprice;
-  showorhide = "Show";
   button = 'Submit';
-  loginstatus;
-  locations:any=[];
-  userdetails;
-  lId;
+  otmethod = 'Offers';
+
   constructor(private formbuilder: FormBuilder, private easydeelservice: EasydealService, private toaster: ToastrService, private router: Router) { }
 
   ngOnInit() {
@@ -47,9 +44,7 @@ export class AddOffersComponent implements OnInit {
       {
 
         sname: ['', Validators.required],
-        mname: [''],
-        showorhide:['', Validators.required],
-
+        mname: ['', Validators.required],
         oloc: ['', Validators.required],
         odes: ['', Validators.required],
         tqpurc: ['', Validators.required],
@@ -62,14 +57,14 @@ export class AddOffersComponent implements OnInit {
         ctime: ['', Validators.required],
         cashback: ['', Validators.required],
         bimages: ['', Validators.required],
-
       })
-      this.loginstatus = JSON.parse(localStorage.getItem("loginstatus"));
-      this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
-      console.log(this.userdetails)
-     
-      this.getallShop();
-      this.getalllocations();
+    if (this.otmethod == 'Offers') {
+      this.offerFormRegistration.get('tqpurc').disable();
+      this.offerFormRegistration.get('tnusers').disable();
+
+    }
+    this.getallShop();
+    this.getalllocations();
   }
   get f() { return this.offerFormRegistration.controls; }
   addimg(event) {
@@ -77,74 +72,30 @@ export class AddOffersComponent implements OnInit {
     this.files = event.target.files;
     this.currentphoto = this.files.item(0);
   }
-  getallShop(){
-    this.loginstatus = JSON.parse(localStorage.getItem("loginstatus"));
-    console.log(this.loginstatus);
-
-    
-    if(this.loginstatus =='masteradmin')
-    {
-      this.easydeelservice.getshop().subscribe(
-        data =>{
-          console.log(data);
-          this.results =data;
-       
-        },
-        error =>{
-          console.log(error);
-        }
-      )
-    }
-    else if(this.loginstatus == 'locationamin')   
-    {
-      // this.locationid=this.userdetails['locationId']._id;
-      // console.log(this.locationid);
-      this.lId = this.userdetails['locationId']._id;
-    this.easydeelservice.getallshopsbylocation(this.lId).subscribe(
-      data =>{
+  getallShop() {
+    this.easydeelservice.getshop().subscribe(
+      data => {
         console.log(data);
-        this.results =data;
-        // this.dataSource.data = this.results;
-      },
-      error =>{
+        this.results = data;
 
+      },
+      error => {
+        console.log(error);
       }
     )
-      
-    }
   }
-
-  shopselcted(s) {
-    console.log(s);
-    this.easydeelservice.getalllocationbyshopid(s).subscribe(
+  getalllocations() {
+    this.easydeelservice.getalllocations().subscribe(
       data => {
-        this.locations = data[0].locationId;
-        console.log(this.locations);
+        console.log(data);
+
+        this.location = data;
 
 
       },
       error => {
-
-      }
-    )
-
-
-  }
-
-
-  
-  getalllocations(){
-    this.easydeelservice.getalllocations().subscribe(
-      data =>{
-        console.log(data);
-    
-        this.location = data;
-     
-        
-      },
-      error =>{
         console.log(error);
-        
+
       }
     )
   }
@@ -155,11 +106,16 @@ export class AddOffersComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.offerFormRegistration.invalid) {
-      this.isLoading = false;
-      this.button = 'submit';
       return;
     }
     else {
+      if (this.tqpurc == undefined) {
+        this.tqpurc = "100";
+      }
+      if (this.tnusers == undefined) {
+
+        this.tnusers = "1000";
+      } 
       this.isLoading = true;
       this.button = 'Processing';
       this.formData.append("shop_id", this.sname);
@@ -175,8 +131,10 @@ export class AddOffersComponent implements OnInit {
       this.formData.append("clos_time", this.ctime);
       this.formData.append("cashback", this.cashback);
       this.formData.append("offer_img", this.currentphoto);
-      this.formData.append("purchase_price",this.pprice);
-      this.formData.append("show",this.showorhide);
+      this.formData.append("off", this.otmethod);
+      this.formData.append("purchase_price", this.pprice);
+
+
       this.easydeelservice.addoffer(this.formData).subscribe(
         data => {
           this.isLoading = false;
@@ -193,4 +151,31 @@ export class AddOffersComponent implements OnInit {
 
     }
   }
+  topdealsoroffers(otmethod) {
+    console.log(otmethod);
+    if (this.otmethod == 'Offers') {
+      this.offerFormRegistration.get('tqpurc').disable();
+      this.offerFormRegistration.get('tnusers').disable();
+      this.tqpurc = "100";
+      this.tnusers = "1000";
+
+
+    }
+    else {
+      this.offerFormRegistration.get('tqpurc').enable();
+      this.offerFormRegistration.get('tnusers').enable();
+    }
+
+
+    if (this.otmethod == 'Top Deals') {
+      this.offerFormRegistration.get('cashback').disable();
+    }
+    else {
+      this.offerFormRegistration.get('cashback').enable();
+
+    }
+
+  }
+
+
 }
