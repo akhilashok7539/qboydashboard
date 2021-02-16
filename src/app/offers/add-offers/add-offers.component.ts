@@ -106,6 +106,8 @@ export class AddOffersComponent implements OnInit {
 
     // stop here if form is invalid
     if (this.offerFormRegistration.invalid) {
+        this.isLoading = false;
+          this.button = 'Submit';
       return;
     }
     else {
@@ -134,7 +136,8 @@ export class AddOffersComponent implements OnInit {
       this.formData.append("off", this.otmethod);
       this.formData.append("purchase_price", this.pprice);
 
-
+      console.log("here");
+      
       this.easydeelservice.addoffer(this.formData).subscribe(
         data => {
           this.isLoading = false;
