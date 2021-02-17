@@ -30,14 +30,16 @@
 
                 <div class="col-sm-4">
                     <label for="">Shop Category </label>
-                    <mat-select placeholder=" Shop Category" formControlName="Shop Category" multiple>
-                        <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
 
-                        <mat-option *ngFor="let filters of resultscat" [value]="filters._id">
-                            {{filters.category_name}}
-                        </mat-option>
-                    </mat-select>
+                    <select name="" id="" class="form-control" [(ngModel)]="scat" [ngClass]="{ 'is-invalid': submitted && f.scat.errors }" formControlName="scat">
+                        <option value="" disabled selected>Choose a option </option>
 
+                        <option *ngFor="let c of resultscat" value="{{c._id}}">{{c.category_name}}</option>
+                    </select>
+                    <div *ngIf="submitted && f.scat.errors" class="invalid-feedback">
+                        <div *ngIf="f.scat.errors.required">Shop category is required</div>
+
+                    </div>
                 </div>
 
 

@@ -14,14 +14,6 @@
     margin-bottom: 10px;
 }
 
-::ng-deep .mat-select
-{
-    background: white;
-    background: w;
-    padding: 9px;
-    border: 1px solid #d7d7d7ad;
-}
-
 .radio-toolbar {
     margin: 10px;
 }

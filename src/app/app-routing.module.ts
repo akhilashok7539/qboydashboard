@@ -46,9 +46,6 @@ import { DeliveryComponent } from './reports/delivery/delivery.component';
 import { PurchaseComponent } from './reports/purchase/purchase.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SalesComponent } from './reports/sales/sales.component';
-import { AddRestTypeComponent } from './rest-type/add-rest-type/add-rest-type.component';
-import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type.component';
-import { RestTypeComponent } from './rest-type/rest-type.component';
 import { AddSettingsComponent } from './settings/add-settings/add-settings.component';
 import { AddAdminCredentialsComponent } from './settings/admin-credentials/add-admin-credentials/add-admin-credentials.component';
 import { AdminCredentialsComponent } from './settings/admin-credentials/admin-credentials.component';
@@ -82,7 +79,6 @@ const routes: Routes = [
   {path:'',pathMatch:"full",redirectTo:"login"},
   {path:'login',component:LoginComponent},
   {path:'home',component:HomeComponent},
-
   {path:'addcategory',component:AddCategoryComponent},
   {path:'shop',component:ShopComponent},
   {path:'addshop',component:AddShopComponent},
@@ -153,9 +149,6 @@ const routes: Routes = [
   {path:'locationadminphonenumber',component:LocationAdminPhonenumberComponent},
   {path:'addlocationadminphonenumber',component:AddLocationAdminPhonenumberComponent},
   {path:'editlocationadminphonenumber',component:EditLocationAdminPhonenumberComponent},
-  {path:'restauranttype',component:RestTypeComponent},
-  {path:'addrestauranttype',component:AddRestTypeComponent},
- {path:'editrestauranttype',component:EditRestTypeComponent},
  
 
 

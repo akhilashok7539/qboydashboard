@@ -69,18 +69,6 @@
                 </div>
 
                 <div class="col-sm-4">
-                    <label for="">Item Type </label>
-                    <mat-select placeholder=" Item Type" formControlName="ItemType" multiple>
-                        <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
-
-                        <mat-option *ngFor="let filters of resultscat" [value]="filters._id">
-                            {{filters.category_name}}
-                        </mat-option>
-                    </mat-select>
-                </div>
-
-
-                <div class="col-sm-4">
                     <label for="">Menu Images </label>
 
                     <input class="form-control" #file type="file" (change)="addmenuimage($event)" [ngClass]="{ 'is-invalid': submitted && f.mimages.errors }" formControlName="mimages">

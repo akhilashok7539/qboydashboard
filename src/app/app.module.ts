@@ -100,11 +100,6 @@ import { LocationAdminViewPendingrequestComponent } from './home/approval-reques
 import { LocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/location-admin-phonenumber.component';
 import { AddLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/add-location-admin-phonenumber/add-location-admin-phonenumber.component';
 import { EditLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/edit-location-admin-phonenumber/edit-location-admin-phonenumber.component';
-
-import { RouterModule } from '@angular/router';
-import { RestTypeComponent } from './rest-type/rest-type.component';
-import { AddRestTypeComponent } from './rest-type/add-rest-type/add-rest-type.component';
-import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -194,16 +189,12 @@ import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type
     LocationAdminPhonenumberComponent,
     AddLocationAdminPhonenumberComponent,
     EditLocationAdminPhonenumberComponent,
-    RestTypeComponent,
-    AddRestTypeComponent,
-    EditRestTypeComponent,
     // MatSort
   ],
   imports: [
     BrowserModule,
     FormsModule,      
     AppRoutingModule,
-
     ReactiveFormsModule,
     ToastrModule.forRoot(), 
     HttpClientModule,
@@ -214,7 +205,7 @@ import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type
 
   entryComponents: [ViewOrderDetailsComponent,ViewimageComponent,ViewPreOrdersComponent],
   
-  providers: [{provide: LocationStrategy,useClass:HashLocationStrategy},],
+  providers: [{provide: LocationStrategy,useClass:HashLocationStrategy}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

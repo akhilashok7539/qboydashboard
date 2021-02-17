@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatOption } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EasydealService } from 'src/app/_services/easydeal.service';
@@ -29,21 +28,6 @@ export class EditRestaurantMenuComponent implements OnInit {
   id;
   isLoading = false;
   button = 'Submit';
-  userTypeFilters = [
-    {
-      key: 1, value: 'Value 1',
-    },
-    {
-      key: 2, value: 'Value 2',
-    },
-    {
-      key: 3, value: 'Value 3',
-    },
-    {
-      key: 4, value: 'Value 4',
-    }
-  ];
-  @ViewChild('allSelected',{static:false}) private allSelected: MatOption;
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService, private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
@@ -54,7 +38,6 @@ export class EditRestaurantMenuComponent implements OnInit {
         mtype: ['', Validators.required],
         ctype: ['', Validators.required],
         mimages: [''],
-        ItemType: new FormControl('')
         // mstyle: ['', Validators.required],
       })
     this.getallcoursetype();
@@ -67,18 +50,6 @@ export class EditRestaurantMenuComponent implements OnInit {
     this.mname = this.restmenu['menu_name'];
 
   }
-  // toggleAllSelection() {
-  //   if (this.allSelected.selected) {
-  //     this.restaurantmenuFormRegistration.controls.userType
-  //       .patchValue([...this.resultscat.map(item => item._id)]);
-  //     console.log( this.restaurantmenuFormRegistration.controls.userType.value)
-
-  //   } else {
-  //     this.restaurantmenuFormRegistration.controls.userType.patchValue([]);
-
-  //     console.log( this.restaurantmenuFormRegistration.controls.userType.value)
-  //   }
-  // }
   get f() { return this.restaurantmenuFormRegistration.controls; }
   submit() {
     this.submitted = true;
