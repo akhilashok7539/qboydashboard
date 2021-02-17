@@ -63,14 +63,17 @@ export class EditCategoryComponent implements OnInit {
     this.status = this.getcatdetails['category_state'];
     this.cat_id = this.getcatdetails['_id']
     this.catloations = this.getcatdetails['locationId'];
+    // this.sessiondayssRepat = this.catloations;
+    // console.log(this.sessiondayssRepat)
     this.getalllocations();
 
-  //   for (let i = 0; i < this.catloations.length; i++) {
+    for (let i = 0; i < this.catloations.length; i++) {
 
-  //       this.arr.push(this.catloations[i]['_id'])    
+        this.arr.push(this.catloations[i]['_id'])    
 
-  //   }
-  //   console.log(this.arr);
+    }
+    console.log(this.arr);
+    this.sessiondayssRepat = this.arr;
   //  const email =  <FormArray>this.categoryFormRegistration.controls.checkeddays;
   // email.push(this.arr);
     if (this.cname == 'RESTAURANT') {
@@ -115,7 +118,7 @@ export class EditCategoryComponent implements OnInit {
 
           this.router.navigate(['/home']);
           this.formData.delete;
-          window.location.reload();
+          // window.location.reload();
         },
         error => {
           this.isLoading = false;
