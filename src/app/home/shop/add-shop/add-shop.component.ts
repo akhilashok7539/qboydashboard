@@ -110,7 +110,7 @@ userTypeFilters = [
       sdamnt: ['', Validators.required],
       simage: ['', Validators.required],
       pucharge: ['', Validators.required],
-      dcharge: ['', Validators.required],
+      // dcharge: ['', Validators.required],
       showorhide: [''],
       status: [''],
       check: [''],
@@ -227,7 +227,7 @@ userTypeFilters = [
       this.formData.append("shop_discount", this.sdperc)
       this.formData.append("shop_discamountamount", this.sdamnt)
       this.formData.append("pickupRate", this.pucharge)
-      this.formData.append("deliveryRate", this.dcharge)
+      this.formData.append("deliveryRate", "0")
       this.formData.append("minimum", this.movalue)
       this.formData.append("show", this.showorhide)
       this.formData.append("state", this.status)
