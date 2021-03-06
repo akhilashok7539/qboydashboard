@@ -24,8 +24,10 @@ import { GeneralShopMenuComponent } from './home/general-shop-menu/general-shop-
 import { HomeComponent } from './home/home.component';
 import { OrdersComponent } from './home/orders/orders.component';
 import { AddPincodesComponent } from './home/pincodes/add-pincodes/add-pincodes.component';
+import { AddSublocationsComponent } from './home/pincodes/add-sublocations/add-sublocations.component';
 import { EditPincodesComponent } from './home/pincodes/edit-pincodes/edit-pincodes.component';
 import { PincodesComponent } from './home/pincodes/pincodes.component';
+import { ViewSubloationsComponent } from './home/pincodes/view-subloations/view-subloations.component';
 import { AddPreOrdersComponent } from './home/pre-orders/add-pre-orders/add-pre-orders.component';
 import { PreOrdersComponent } from './home/pre-orders/pre-orders.component';
 import { AddRestaurantMenuComponent } from './home/restaurant-menu/add-restaurant-menu/add-restaurant-menu.component';
@@ -46,6 +48,9 @@ import { DeliveryComponent } from './reports/delivery/delivery.component';
 import { PurchaseComponent } from './reports/purchase/purchase.component';
 import { ReportsComponent } from './reports/reports.component';
 import { SalesComponent } from './reports/sales/sales.component';
+import { AddRestTypeComponent } from './rest-type/add-rest-type/add-rest-type.component';
+import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type.component';
+import { RestTypeComponent } from './rest-type/rest-type.component';
 import { AddSettingsComponent } from './settings/add-settings/add-settings.component';
 import { AddAdminCredentialsComponent } from './settings/admin-credentials/add-admin-credentials/add-admin-credentials.component';
 import { AdminCredentialsComponent } from './settings/admin-credentials/admin-credentials.component';
@@ -79,6 +84,7 @@ const routes: Routes = [
   {path:'',pathMatch:"full",redirectTo:"login"},
   {path:'login',component:LoginComponent},
   {path:'home',component:HomeComponent},
+
   {path:'addcategory',component:AddCategoryComponent},
   {path:'shop',component:ShopComponent},
   {path:'addshop',component:AddShopComponent},
@@ -149,7 +155,12 @@ const routes: Routes = [
   {path:'locationadminphonenumber',component:LocationAdminPhonenumberComponent},
   {path:'addlocationadminphonenumber',component:AddLocationAdminPhonenumberComponent},
   {path:'editlocationadminphonenumber',component:EditLocationAdminPhonenumberComponent},
- 
+  {path:'restauranttype',component:RestTypeComponent},
+  {path:'addrestauranttype',component:AddRestTypeComponent},
+ {path:'editrestauranttype',component:EditRestTypeComponent},
+ {path:'addsublocations',component:AddSublocationsComponent},
+ {path:'view-sublocations',component:ViewSubloationsComponent},
+
 
 
 

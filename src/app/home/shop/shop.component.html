@@ -61,7 +61,7 @@
                     <ng-container matColumnDef="image">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Image </mat-header-cell>
                         <mat-cell *matCellDef="let row">
-                            <img src="{{apiUrl}}/shop/get/image/{{row._id}}" alt="" style="width: 100px;">
+                            <img src="{{apiUrl}}shop/get/image/{{row._id}}" alt="" style="width: 100px;">
                         </mat-cell>
                     </ng-container>
 
@@ -72,10 +72,10 @@
                     </ng-container>
 
                     <!-- Category Name Column -->
-                    <ng-container matColumnDef="categoryname">
+                    <!-- <ng-container matColumnDef="categoryname">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Category Name</mat-header-cell>
                         <mat-cell *matCellDef="let row"> {{row.category_id.category_name}}</mat-cell>
-                    </ng-container>
+                    </ng-container> -->
 
                     <!-- Phone Number Column -->
                     <ng-container matColumnDef="phonenumber">

@@ -45,5 +45,8 @@ edit(s)
   sessionStorage.setItem("location",JSON.stringify(s));
   this.router.navigate(['/editpincodes']);
 }
-
+view(s){
+  sessionStorage.setItem("slocation",JSON.stringify(s));
+  this.router.navigate(['/view-sublocations']);
+}
 }

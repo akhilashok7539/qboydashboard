@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { EasydealService } from 'src/app/_services/easydeal.service';
 import { ToastrService } from 'ngx-toastr';
+import { MatOption } from '@angular/material';
 @Component({
   selector: 'app-add-shop',
   templateUrl: './add-shop.component.html',
@@ -10,6 +11,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class AddShopComponent implements OnInit {
   // shopform:FormGroup;
+  
   sessiondayssRepat
   repeatsessiondays = [
     {
@@ -37,7 +39,7 @@ export class AddShopComponent implements OnInit {
 
   ]
   value;
-
+  shopcatarray:any = [];
   shopFormRegistration: FormGroup;
   submitted = false;
 
@@ -73,7 +75,21 @@ error;
 imagePreview;
 employee
 isvalidphoto = false;
-
+userTypeFilters = [
+  {
+    key: 1, value: 'Value 1',
+  },
+  {
+    key: 2, value: 'Value 2',
+  },
+  {
+    key: 3, value: 'Value 3',
+  },
+  {
+    key: 4, value: 'Value 4',
+  }
+];
+@ViewChild('allSelected',{static:false}) private allSelected: MatOption;
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService,
      private router: Router,
     private toaster: ToastrService) { }
@@ -81,7 +97,7 @@ isvalidphoto = false;
   ngOnInit() {
     this.shopFormRegistration = this.formbuilder.group({
       sname: ['', Validators.required],
-      scat: ['', Validators.required],
+      
       saddress: ['', Validators.required],
       sln: [''],
       sphn: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
@@ -95,16 +111,33 @@ isvalidphoto = false;
       simage: ['', Validators.required],
       pucharge: ['', Validators.required],
       dcharge: ['', Validators.required],
-      showorhide: ['', Validators.required],
-      status: ['', Validators.required],
-      check: ['', Validators.required],
+      showorhide: [''],
+      status: [''],
+      check: [''],
       checkeddays: this.formbuilder.array([]),
+      userType: new FormControl('')
     })
     this.getallCategory();
     this.getalllocations();
 
   }
+  toggleAllSelection() {
 
+    if (this.allSelected.selected) {
+      console.log("enter here");
+
+      this.shopFormRegistration.controls.userType
+        .patchValue([...this.resultscat.map(item => item._id)]);
+      console.log( this.shopFormRegistration.controls.userType.value)
+
+    } else {
+      console.log("enter heres");
+      
+      this.shopFormRegistration.controls.userType.patchValue([]);
+      this.shopcatarray = this.shopFormRegistration.controls.userType.value;
+      console.log( this.shopFormRegistration.controls.userType.value)
+    }
+  }
 
   onChange(time: string, isChecked: boolean) {
     this.sessiondayssRepat = [];
@@ -167,19 +200,23 @@ isvalidphoto = false;
     this.currentphoto = this.files.item(0);
   }
   submit() {
+
+    this.shopcatarray= this.shopFormRegistration.controls.userType.value;
     this.submitted = true;
     this.isLoading = true;
     this.button = 'Processing';
     if (this.shopFormRegistration.invalid) {
       this.isLoading = false;
       this.button = 'submit';
+      console.log(this.shopFormRegistration.getError);
+      
       return;
     }
     else {
       this.isLoading = true;
       this.button = 'Processing';
       this.formData.append("shop_name", this.sname.toUpperCase())
-      this.formData.append("category_id", this.scat)
+    
       this.formData.append("shop_phone", this.sphn)
       this.formData.append("shop_landline", this.sln)
       this.formData.append("open_time",this.sotime)
@@ -202,7 +239,10 @@ isvalidphoto = false;
         this.formData.append("locationId", this.sessiondayssRepat[i])
 
       }
-
+      for(let j=0;j<this.shopcatarray.length;j++)
+      {
+        this.formData.append("category_id", this.shopcatarray[j])
+      }
       this.easydealservice.addshop(this.formData).subscribe(
         data => {
           this.isLoading = false;

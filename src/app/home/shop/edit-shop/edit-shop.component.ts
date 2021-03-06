@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatOption } from '@angular/material';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { EasydealService } from 'src/app/_services/easydeal.service';
@@ -51,6 +52,21 @@ imagePreview;
 employee
 isvalidphoto = false;
 shoplocations:any=[];
+userTypeFilters = [
+  {
+    key: 1, value: 'Value 1',
+  },
+  {
+    key: 2, value: 'Value 2',
+  },
+  {
+    key: 3, value: 'Value 3',
+  },
+  {
+    key: 4, value: 'Value 4',
+  }
+];
+@ViewChild('allSelected',{static:false}) private allSelected: MatOption;
 
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService, private router: Router,
     private toaster: ToastrService) { }
@@ -119,6 +135,19 @@ shoplocations:any=[];
     // console.log(this.sessiondayssRepat=<FormArray>this.shopFormRegistration.controls.checkeddays);
 
   }
+  toggleAllSelection() {
+    if (this.allSelected.selected) {
+      this.shopFormRegistration.controls.userType
+        .patchValue([...this.resultscat.map(item => item._id)]);
+      console.log( this.shopFormRegistration.controls.userType.value)
+
+    } else {
+      this.shopFormRegistration.controls.userType.patchValue([]);
+
+      console.log( this.shopFormRegistration.controls.userType.value)
+    }
+  }
+
 
   onChange(time: string, isChecked: boolean) {
     this.sessiondayssRepat = [];

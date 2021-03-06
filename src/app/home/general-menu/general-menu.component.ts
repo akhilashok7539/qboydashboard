@@ -35,7 +35,7 @@ export class GeneralMenuComponent implements OnInit {
     private toastr: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    this.apiUrl = "https://shopgi.in/";
+    this.apiUrl = "https://qboy.in/";
     this.status = JSON.parse(localStorage.getItem("loginstatus"));
     this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
     this.getallgeneralmenu();

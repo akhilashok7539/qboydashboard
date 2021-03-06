@@ -346,4 +346,11 @@ updatelocation(req,id)
 {
   return this.http.patch(this.apiUrl+'location/edit/'+id,req);
 }
+addslocation(req){
+  return this.http.post(this.apiUrl+'sublocation/post',req);
+}
+getsubloationbyloationid(id)
+{
+  return this.http.get(this.apiUrl+'sublocation/'+id);
+}
 }

@@ -43,7 +43,7 @@ export class RestaurantMenuComponent implements OnInit {
   ngOnInit() {
     this.status = JSON.parse(localStorage.getItem("loginstatus"));
 
-    this.apiUrl = "https://shopgi.in/";
+    this.apiUrl = "https://qboy.in/";
     this.getallmenu();
 
     console.log(status);

@@ -7,32 +7,39 @@ import { ToastrService } from 'ngx-toastr';
 import { EasydealService } from 'src/app/_services/easydeal.service';
 // import { environment } from 'src/environments/environment';
 import {Sort} from '@angular/material';
+import { Observable,Subscription , Observer, fromEvent, merge } from 'rxjs';
+
 
 @Component({
   selector: 'app-category',
   templateUrl: './category.component.html',
   styleUrls: ['./category.component.css']
 })
+
+
 export class CategoryComponent implements OnInit {
   displayedColumns = ['id', 'categoryname', 'image', 'action'];
-
   apiUrl;
   status;
   @ViewChild(MatSort, { static: false }) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   results: any = [];
   dataSource : MatTableDataSource<any>= new MatTableDataSource(this.results);
-
+  isConnected: Observable<boolean>;
 
   constructor(private easydealservice: EasydealService, private router: Router, private toastr: ToastrService) { }
 
   ngOnInit() {
-    this.apiUrl = "https://shopgi.in/";
+    this.apiUrl = "https://qboy.in/";
 
 
     this.getallCategory();
     this.status = JSON.parse(localStorage.getItem("loginstatus"));
     console.log(status);
+    
+    
+
+
   }
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;

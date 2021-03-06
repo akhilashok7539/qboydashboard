@@ -10,7 +10,7 @@ import { EasydealService } from 'src/app/_services/easydeal.service';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  displayedColumns = ['image', 'shopname', 'categoryname', 'phonenumber','status','action'];
+  displayedColumns = ['image', 'shopname', 'phonenumber','status','action'];
   dataSource = new MatTableDataSource();
 
   // @ViewChild(MatSort) sort: MatSort;
@@ -36,7 +36,7 @@ export class ShopComponent implements OnInit {
     console.log(this.userdetails);
     
 
-    this.apiUrl="https://shopgi.in/";
+    this.apiUrl="https://qboy.in/";
     this.getallShop();
   }
   getallShop(){

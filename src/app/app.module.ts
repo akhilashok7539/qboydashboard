@@ -100,6 +100,13 @@ import { LocationAdminViewPendingrequestComponent } from './home/approval-reques
 import { LocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/location-admin-phonenumber.component';
 import { AddLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/add-location-admin-phonenumber/add-location-admin-phonenumber.component';
 import { EditLocationAdminPhonenumberComponent } from './settings/location-admin-phonenumber/edit-location-admin-phonenumber/edit-location-admin-phonenumber.component';
+
+import { RouterModule } from '@angular/router';
+import { RestTypeComponent } from './rest-type/rest-type.component';
+import { AddRestTypeComponent } from './rest-type/add-rest-type/add-rest-type.component';
+import { EditRestTypeComponent } from './rest-type/edit-rest-type/edit-rest-type.component';
+import { AddSublocationsComponent } from './home/pincodes/add-sublocations/add-sublocations.component';
+import { ViewSubloationsComponent } from './home/pincodes/view-subloations/view-subloations.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -189,12 +196,18 @@ import { EditLocationAdminPhonenumberComponent } from './settings/location-admin
     LocationAdminPhonenumberComponent,
     AddLocationAdminPhonenumberComponent,
     EditLocationAdminPhonenumberComponent,
+    RestTypeComponent,
+    AddRestTypeComponent,
+    EditRestTypeComponent,
+    AddSublocationsComponent,
+    ViewSubloationsComponent,
     // MatSort
   ],
   imports: [
     BrowserModule,
     FormsModule,      
     AppRoutingModule,
+
     ReactiveFormsModule,
     ToastrModule.forRoot(), 
     HttpClientModule,
@@ -205,7 +218,7 @@ import { EditLocationAdminPhonenumberComponent } from './settings/location-admin
 
   entryComponents: [ViewOrderDetailsComponent,ViewimageComponent,ViewPreOrdersComponent],
   
-  providers: [{provide: LocationStrategy,useClass:HashLocationStrategy}],
+  providers: [{provide: LocationStrategy,useClass:HashLocationStrategy},],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
