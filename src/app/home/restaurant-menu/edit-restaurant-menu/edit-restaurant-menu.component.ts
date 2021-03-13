@@ -43,6 +43,8 @@ export class EditRestaurantMenuComponent implements OnInit {
       key: 4, value: 'Value 4',
     }
   ];
+  resultscat:any = [];
+  itemcatarray:any = [];
   @ViewChild('allSelected',{static:false}) private allSelected: MatOption;
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService, private toastr: ToastrService, private router: Router) { }
 
@@ -58,6 +60,7 @@ export class EditRestaurantMenuComponent implements OnInit {
         // mstyle: ['', Validators.required],
       })
     this.getallcoursetype();
+    this.getallmenus();
     this.restmenu = JSON.parse(sessionStorage.getItem("restmenu"));
     this.mname = this.restmenu['menu_name'];
     this.mdes = this.restmenu['menu_desc'];
@@ -65,26 +68,37 @@ export class EditRestaurantMenuComponent implements OnInit {
     this.ctype = this.restmenu.courceId['_id'];
     this.id = this.restmenu['_id'];
     this.mname = this.restmenu['menu_name'];
+    this.itemcatarray = this.restmenu['courceId'];
 
   }
-  // toggleAllSelection() {
-  //   if (this.allSelected.selected) {
-  //     this.restaurantmenuFormRegistration.controls.userType
-  //       .patchValue([...this.resultscat.map(item => item._id)]);
-  //     console.log( this.restaurantmenuFormRegistration.controls.userType.value)
+  getallmenus(){
+    this.easydealservice.getallitems().subscribe(
+      data =>{
+        this.resultscat = data;
+      },
+      error =>{
 
-  //   } else {
-  //     this.restaurantmenuFormRegistration.controls.userType.patchValue([]);
+      }
+    )
+  }
+  toggleAllSelection() {
+    if (this.allSelected.selected) {
+      this.restaurantmenuFormRegistration.controls.ItemType
+        .patchValue([...this.resultscat.map(item => item._id)]);
+      console.log( this.restaurantmenuFormRegistration.controls.ItemType.value)
 
-  //     console.log( this.restaurantmenuFormRegistration.controls.userType.value)
-  //   }
-  // }
+    } else {
+      this.restaurantmenuFormRegistration.controls.ItemType.patchValue([]);
+
+      console.log( this.restaurantmenuFormRegistration.controls.ItemType.value)
+    }
+  }
   get f() { return this.restaurantmenuFormRegistration.controls; }
   submit() {
     this.submitted = true;
     this.isLoading = true;
     this.button = 'Processing';
-
+    this.itemcatarray= this.restaurantmenuFormRegistration.controls.ItemType.value;
     // stop here if form is invalid
     if (this.restaurantmenuFormRegistration.invalid) {
       this.isLoading = false;
@@ -99,6 +113,10 @@ export class EditRestaurantMenuComponent implements OnInit {
       this.formData.append("menu_type", this.mtype)
       this.formData.append("courceId", this.ctype)
       this.formData.append("menu_img", this.currentphoto)
+      for(let i=0;i<this.itemcatarray.length;i++)
+      {
+        this.formData.append("item_type",this.itemcatarray[i]);
+      }
       this.easydealservice.editrestmenu(this.formData,this.id).subscribe(
         data => {
           this.isLoading = false;

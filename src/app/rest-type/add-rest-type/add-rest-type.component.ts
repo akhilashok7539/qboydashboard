@@ -43,27 +43,28 @@ export class AddRestTypeComponent implements OnInit {
     else {
       this.isLoading = true;
       this.button = 'Processing';
-      // let s:String;
-      // s = this.ctype;
-      // console.log();
-      // let req = {
-      //   "courceName": this.ctype.toUpperCase(),
-      // }
+      let s:String;
+      s = this.itype;
+      console.log();
+      let req = {
+        "item_type": this.itype.toUpperCase(),
+      }
 
 
 
-      // this.easydeelservice.addcourse(req).subscribe(
-      //   data => {
-      //     this.isLoading = false;
-      //     this.button = 'Submit';
-      //     this.toaster.success("Course type added successfully");
-      //     this.router.navigate(['/coursetype'])
-      //   },
+      this.easydeelservice.addcourseitemtype(req).subscribe(
+        data => {
+          this.isLoading = false;
+          this.button = 'Submit';
+          this.toaster.success("Item type added successfully");
+          this.router.navigate(['/restauranttype'])
+        },
         error => {
           this.isLoading = false;
           this.button = 'Submit';
 
         }
+      );
       // )
     }
   }

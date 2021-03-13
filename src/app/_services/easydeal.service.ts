@@ -353,4 +353,16 @@ getsubloationbyloationid(id)
 {
   return this.http.get(this.apiUrl+'sublocation/'+id);
 }
+addcourseitemtype(req)
+{
+  return this.http.post(this.apiUrl+'itemtype/post',req);
+}
+editcourseitemtype(id,req)
+{
+  return this.http.patch(this.apiUrl+'itemtype/edit/'+id,req);
+
+}
+getallitems(){
+  return this.http.get(this.apiUrl+'itemtype');
+}
 }

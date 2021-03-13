@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <h4 class="page-title"> Edit Shop</h4>
-
+                <!-- <button (click)="add()">click</button> -->
             </div>
         </div>
         <form [formGroup]="shopFormRegistration">
@@ -30,7 +30,7 @@
 
                 <div class="col-sm-4">
                     <label for="">Shop Category </label>
-                    <mat-select placeholder=" Shop Category" formControlName="Shop Category" multiple>
+                    <mat-select placeholder=" Shop Category" formControlName="userType" multiple>
                         <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
 
                         <mat-option *ngFor="let filters of resultscat" [value]="filters._id">

@@ -41,6 +41,8 @@ export class AddRestaurantMenuComponent implements OnInit {
       key: 4, value: 'Value 4',
     }
   ];
+  resultscat:any = [];
+  itemcatarray:any =[];
   @ViewChild('allSelected',{static:false}) private allSelected: MatOption;
   constructor(private formbuilder:FormBuilder,private easydealservice:EasydealService,private toastr:ToastrService, private router:Router) { }
 
@@ -56,27 +58,30 @@ export class AddRestaurantMenuComponent implements OnInit {
         ItemType: new FormControl('')
     })
     this.getallcoursetype();
+    this.getallmenus();
     
   }
-  // toggleAllSelection() {
-  //   if (this.allSelected.selected) {
-  //     this.restaurantmenuFormRegistration.controls.userType
-  //       .patchValue([...this.resultscat.map(item => item._id)]);
-  //     console.log( this.restaurantmenuFormRegistration.controls.userType.value)
+  toggleAllSelection() {
+    if (this.allSelected.selected) {
+      this.restaurantmenuFormRegistration.controls.ItemType
+        .patchValue([...this.resultscat.map(item => item._id)]);
+      console.log( this.restaurantmenuFormRegistration.controls.ItemType.value)
 
-  //   } else {
-  //     this.restaurantmenuFormRegistration.controls.userType.patchValue([]);
+    } else {
+      this.restaurantmenuFormRegistration.controls.ItemType.patchValue([]);
 
-  //     console.log( this.restaurantmenuFormRegistration.controls.userType.value)
-  //   }
-  // }
+      console.log( this.restaurantmenuFormRegistration.controls.ItemType.value)
+    }
+  }
 get f() { return this.restaurantmenuFormRegistration.controls; }
   submit(){
     this.submitted = true;
     this.isLoading = true;
     this.button = 'Processing';
-
+    this.itemcatarray= this.restaurantmenuFormRegistration.controls.ItemType.value;
     // stop here if form is invalid
+    console.log(this.itemcatarray);
+    
     if (this.restaurantmenuFormRegistration.invalid) {
       this.isLoading = false;
       this.button = 'submit';
@@ -90,6 +95,10 @@ get f() { return this.restaurantmenuFormRegistration.controls; }
     this.formData.append("menu_type",this.mtype)
     this.formData.append("courceId",this.ctype)
     this.formData.append("menu_img",this.currentphoto)
+    for(let i=0;i<this.itemcatarray.length;i++)
+    {
+      this.formData.append("item_type",this.itemcatarray[i]);
+    }
     this.easydealservice.addrestmenu(this.formData).subscribe(
          data=>{
           this.isLoading = false;
@@ -110,6 +119,16 @@ get f() { return this.restaurantmenuFormRegistration.controls; }
          
        )
     }
+  }
+  getallmenus(){
+    this.easydealservice.getallitems().subscribe(
+      data =>{
+        this.resultscat = data;
+      },
+      error =>{
+
+      }
+    )
   }
   getallcoursetype() {
     this.easydealservice.getallcoursetype().subscribe(

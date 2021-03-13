@@ -16,6 +16,9 @@ export class EditRestTypeComponent implements OnInit {
   itype;
   isLoading = false;
   button = 'Submit';
+  itemtype:any=[];
+  id;
+  
   constructor(private formbuilder: FormBuilder, private router: Router, private easydeelservice: EasydealService, private toaster: ToastrService) { }
 
   ngOnInit() {
@@ -25,11 +28,14 @@ export class EditRestTypeComponent implements OnInit {
         itype: ['', Validators.required],
 
       })
-
+      this.itemtype = JSON.parse(sessionStorage.getItem("itemtype"));
+      this.itype = this.itemtype['item_type'];
+      this.id = this.itemtype['_id']
   }
   get f() { return this.editrestaurantitemtypeformregistration.controls; }
 
   submit() {
+
     this.submitted = true;
     this.isLoading = true;
     this.button = 'Processing';
@@ -43,28 +49,29 @@ export class EditRestTypeComponent implements OnInit {
     else {
       this.isLoading = true;
       this.button = 'Processing';
-      // let s:String;
-      // s = this.ctype;
-      // console.log();
-      // let req = {
-      //   "courceName": this.ctype.toUpperCase(),
-      // }
+      let s:String;
+      s = this.itype;
+      console.log();
+      let req = {
+        "item_type": this.itype.toUpperCase(),
+      }
 
 
 
-      // this.easydeelservice.addcourse(req).subscribe(
-      //   data => {
-      //     this.isLoading = false;
-      //     this.button = 'Submit';
-      //     this.toaster.success("Course type added successfully");
-      //     this.router.navigate(['/coursetype'])
-      //   },
+      this.easydeelservice.editcourseitemtype(this.id,req).subscribe(
+        data => {
+          this.isLoading = false;
+          this.button = 'Submit';
+          this.toaster.success("Item type update successfully");
+          this.router.navigate(['/restauranttype'])
+        },
         error => {
           this.isLoading = false;
           this.button = 'Submit';
+          this.toaster.error("Item type unable to update successfully");
 
         }
-      // )
+      );
     }
   }
 }

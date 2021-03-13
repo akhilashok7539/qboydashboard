@@ -40,6 +40,7 @@ export class EditShopComponent implements OnInit {
   currentphoto;
   resultscat: any = [];
   locations: any = [];
+  shopcatarray:any = [];
   shopdetails;
   id;
   isLoading = false;
@@ -52,6 +53,8 @@ imagePreview;
 employee
 isvalidphoto = false;
 shoplocations:any=[];
+catidarray:any=[];
+arr2:any=[];
 userTypeFilters = [
   {
     key: 1, value: 'Value 1',
@@ -74,27 +77,25 @@ userTypeFilters = [
   ngOnInit() {
     this.shopFormRegistration = this.formbuilder.group({
       sname: ['', Validators.required],
-      scat: ['', Validators.required],
+      
       saddress: ['', Validators.required],
-
-      sln: ['', Validators.required],
+      sln: [''],
       sphn: ['', [Validators.required,Validators.pattern('[6-9]\\d{9}')]],
+      dtime: ['', Validators.required],
       sotime: ['', Validators.required],
-
       sctime: ['', Validators.required],
       profit: ['', Validators.required],
       movalue: ['', Validators.required],
-
       sdperc: ['', Validators.required],
-      pucharge: ['', Validators.required],
-      // dcharge: ['', Validators.required],
-      dtime: ['', Validators.required],
       sdamnt: ['', Validators.required],
       simage: [''],
-      showorhide: ['', Validators.required],
-      status: ['', Validators.required],
+      pucharge: ['', Validators.required],
+      // dcharge: ['', Validators.required],
+      showorhide: [''],
+      status: [''],
       check: [''],
       checkeddays: this.formbuilder.array([]),
+      userType: new FormControl('')
     })
     this.getallCategory();
     this.getalllocations();
@@ -117,6 +118,19 @@ userTypeFilters = [
     this.status = this.shopdetails['shop_state']
     this.id=this.shopdetails['_id']
     this.shoplocations = this.shopdetails['locationId'];
+    this.shopcatarray = this.shopdetails['category_id'];
+    // this.shopFormRegistration.controls.userType = this.shopcatarray;
+    // console.log(this.catidarray);
+    
+    // for(let i =0;i<this.catidarray.length;i++)
+    // {
+    //   this.arr2.push(this.catidarray[i]._id);
+    // }
+    // console.log(this.arr2);
+    // this.shopFormRegistration.controls.userType
+    // .patchValue([...this.shopcatarray.map(item => item._id)]);
+    // console.log( this.shopFormRegistration.controls.userType.value)
+    
     // this.sessiondayssRepat = this.shopdetails['locationId'];
     // console.log(this.sessiondayssRepat);
     // // let arr = [];
@@ -133,22 +147,40 @@ userTypeFilters = [
     // arr.push(this.shopdetails.locationId['_id']);
     // this.sessiondayssRepat =arr;
     // console.log(this.sessiondayssRepat=<FormArray>this.shopFormRegistration.controls.checkeddays);
+    
 
   }
+  // equals(objone,objtwo)
+  // {
+  //   if(typeof objone !== 'undefined' && typeof objtwo !== 'undefined')
+  //   {
+  //     return objone._id === objtwo._id
+  //   }
+  // }
   toggleAllSelection() {
+
     if (this.allSelected.selected) {
+      console.log("enter here");
+
       this.shopFormRegistration.controls.userType
         .patchValue([...this.resultscat.map(item => item._id)]);
       console.log( this.shopFormRegistration.controls.userType.value)
 
     } else {
+      console.log("enter heres");
+      
       this.shopFormRegistration.controls.userType.patchValue([]);
-
+      this.shopcatarray = this.shopFormRegistration.controls.userType.value;
       console.log( this.shopFormRegistration.controls.userType.value)
     }
   }
 
-
+// add()
+// {
+//   this.shopcatarray= this.shopFormRegistration.controls.userType.value;
+//   console.log(this.shopcatarray);
+  
+// }
   onChange(time: string, isChecked: boolean) {
     this.sessiondayssRepat = [];
     const emailFormArray = <FormArray>this.shopFormRegistration.controls.checkeddays;
@@ -223,10 +255,13 @@ userTypeFilters = [
       return;
     }
     else {
+      this.shopcatarray= this.shopFormRegistration.controls.userType.value;
+      console.log(this.shopcatarray);
+      
       this.isLoading = true;
       this.button = 'Processing';
       this.formData.append("shop_name", this.sname.toUpperCase( ))
-      this.formData.append("category_id", this.scat)
+      // this.formData.append("category_id", this.scat)
       this.formData.append("shop_phone", this.sphn)
       this.formData.append("shop_landline", this.sln)
       // this.formData.append("open",this.sotime)
@@ -260,6 +295,10 @@ userTypeFilters = [
         {
           this.formData.append("locationId",this.shoplocations[i]._id)
         }
+      }
+      for(let j=0;j<this.shopcatarray.length;j++)
+      {
+        this.formData.append("category_id", this.shopcatarray[j])
       }
    
 

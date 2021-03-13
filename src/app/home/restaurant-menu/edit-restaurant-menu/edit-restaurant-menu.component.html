@@ -74,7 +74,7 @@
                         <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>
 
                         <mat-option *ngFor="let filters of resultscat" [value]="filters._id">
-                            {{filters.category_name}}
+                            {{filters.item_type}}
                         </mat-option>
                     </mat-select>
                 </div>
