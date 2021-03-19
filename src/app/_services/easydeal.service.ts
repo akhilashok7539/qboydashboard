@@ -365,4 +365,35 @@ editcourseitemtype(id,req)
 getallitems(){
   return this.http.get(this.apiUrl+'itemtype');
 }
+getpreordershop(id){
+  return this.http.get(this.apiUrl+'preorders/shop/item/'+id);
+
+}
+getreportbyDate(req){
+  return this.http.get(this.apiUrl+'report/dailyreport?rdate='+req);
+}
+getbydatereports(from,enddate)
+{
+  return this.http.get(this.apiUrl+'report/dailyreport/date?from_date='+from+'&to_date='+enddate);
+}
+getbydatereportsbylocation(id,from,enddate){
+  return this.http.get(this.apiUrl+'report/dailyreport/location/'+id+'?from_date='+from+'&to_date='+enddate);
+
+}
+getreportbyDatebyloations(id,date){
+  return this.http.get(this.apiUrl+'report/dailyreport/location/'+id+'?rdate='+date);
+
+}
+getpurchasereport(sid,fromdate,todate)
+{
+  return this.http.get(this.apiUrl+'report/purchasereport/'+sid+'?from_date='+fromdate+'&to_date='+todate);
+}
+getalldeliveryboyreport(id,fromdate,todate)
+{
+  return this.http.get(this.apiUrl+'report/deliveryboy/dboy/'+id+'?from_date='+fromdate+'&to_date='+todate);
+}
+updateprice(sid,req)
+{
+  return this.http.patch(this.apiUrl+'addrestaurantmenu/salesrate/shop/'+sid,req);
+}
 }
