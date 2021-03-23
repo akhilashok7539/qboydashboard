@@ -69,6 +69,14 @@
                 </div>
 
                 <div class="col-sm-4">
+                    <label for="">Do you Want to edit Item Type</label>
+                    <br> yes
+                    <input type="radio" [(ngModel)]="condtionyesorno" value="yes" [ngModelOptions]="{standalone: true}"> No
+                    <input type="radio" [(ngModel)]="condtionyesorno" value="no" [ngModelOptions]="{standalone: true}">
+
+
+                </div>
+                <div class="col-sm-4" *ngIf="condtionyesorno == 'yes'">
                     <label for="">Item Type </label>
                     <mat-select placeholder=" Item Type" formControlName="ItemType" multiple>
                         <mat-option #allSelected (click)="toggleAllSelection()" [value]="0">All</mat-option>

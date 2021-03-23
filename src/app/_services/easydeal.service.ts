@@ -50,6 +50,9 @@ export class EasydealService {
   getallshopsbylocation(id) {
     return this.http.get(this.apiUrl + 'shop/franchise/location/' + id);
   }
+  getrestmenubyshopid(s){
+    return this.http.get(this.apiUrl+'addrestaurantmenu/shop/'+s);
+  }
   addshop(formData) {
     return this.http.post(this.apiUrl + 'shop/post', formData);
   }
@@ -75,7 +78,7 @@ export class EasydealService {
 
     }
 
-    return this.http.patch(this.apiUrl + 'addrestaurantmenu/edit/state/' + a, req);
+    return this.http.patch(this.apiUrl + 'addrestaurantmenu/edit/manual_state/' + a, req);
   }
   getalllocations() {
 
@@ -145,6 +148,9 @@ export class EasydealService {
   getallmenusbylocation(id,page) {
     return this.http.get(this.apiUrl + 'addrestaurantmenu/location/rest/' + id+'?page='+page+'&limit=25');
 
+  }
+  searchbyitemname(id,searchstring){
+    return this.http.get(this.apiUrl+'addrestaurantmenu/search/shop/'+id+'?data='+searchstring);
   }
   addgeneralitemmenu(s) {
     return this.http.post(this.apiUrl + 'generalitem/post', s);

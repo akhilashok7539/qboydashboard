@@ -11,7 +11,7 @@
             <div class="col-sm-4">
                 <div class="row">
                     <h4 class="page-title">RESTAURANT MENU</h4>
-                    <button class="btn btn-danger" style="height: 33px;
+                    <button class="btn btn-primary" style="height: 33px;
                     margin-left: 23px;" routerLink="/addshopmenu"> Add Restaurant Menu</button>
                 </div>
             </div>
@@ -19,7 +19,7 @@
                 <select class="form-control" id="" [(ngModel)]="options" (change)="filter1(options)">
                 <option value="" selected>Choose a option</option>
                 <option value="s">Shop Name</option>
-                <option value="l">Location</option>
+                <!-- <option value="l">Location</option> -->
                 
 
               </select>
@@ -103,8 +103,8 @@
 
                             <div>
 
-                                <button class="btn btn-warning" (click)="active(row)" *ngIf="row.status == 'Inactive'">Active </button>&nbsp;
-                                <button class="btn btn-danger" (click)="inactive(row)" *ngIf="row.status == 'Active'">In-Active </button>
+                                <button class="btn btn-warning" (click)="active(row)" *ngIf="row.mstatus == 'Inactive'">Active </button>&nbsp;
+                                <button class="btn btn-danger" (click)="inactive(row)" *ngIf="row.mstatus == 'Active'">In-Active </button>
                             </div>
 
                         </mat-cell>

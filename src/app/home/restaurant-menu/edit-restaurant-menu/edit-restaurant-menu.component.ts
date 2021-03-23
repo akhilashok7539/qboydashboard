@@ -29,6 +29,7 @@ export class EditRestaurantMenuComponent implements OnInit {
   id;
   isLoading = false;
   button = 'Submit';
+  condtionyesorno:any = 'no';
   userTypeFilters = [
     {
       key: 1, value: 'Value 1',
@@ -45,6 +46,7 @@ export class EditRestaurantMenuComponent implements OnInit {
   ];
   resultscat:any = [];
   itemcatarray:any = [];
+  itemcatarrays:any = [];
   @ViewChild('allSelected',{static:false}) private allSelected: MatOption;
   constructor(private formbuilder: FormBuilder, private easydealservice: EasydealService, private toastr: ToastrService, private router: Router) { }
 
@@ -68,7 +70,7 @@ export class EditRestaurantMenuComponent implements OnInit {
     this.ctype = this.restmenu.courceId['_id'];
     this.id = this.restmenu['_id'];
     this.mname = this.restmenu['menu_name'];
-    this.itemcatarray = this.restmenu['courceId'];
+    this.itemcatarrays = this.restmenu['item_type'];
 
   }
   getallmenus(){
@@ -113,10 +115,20 @@ export class EditRestaurantMenuComponent implements OnInit {
       this.formData.append("menu_type", this.mtype)
       this.formData.append("courceId", this.ctype)
       this.formData.append("menu_img", this.currentphoto)
-      for(let i=0;i<this.itemcatarray.length;i++)
+      if(this.condtionyesorno == 'no')
       {
-        this.formData.append("item_type",this.itemcatarray[i]);
+        for(let i=0;i<this.itemcatarrays.length;i++)
+      {
+        this.formData.append("item_type",this.itemcatarrays[i]._id);
       }
+      }
+      else{
+        for(let i=0;i<this.itemcatarray.length;i++)
+        {
+          this.formData.append("item_type",this.itemcatarray[i]);
+        }
+      }
+   
       this.easydealservice.editrestmenu(this.formData,this.id).subscribe(
         data => {
           this.isLoading = false;

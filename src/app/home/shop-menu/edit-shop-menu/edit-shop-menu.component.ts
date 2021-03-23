@@ -143,7 +143,7 @@ this.userdetails = JSON.parse(localStorage.getItem("userdetails"));
         "location_id":this.location,
         "menu_id":this.mname,
         "menu_desc":this.mdes,
-        "purchaseRate":this.profitrate.toFixed(),
+        "purchaseRate":this.prate,
         "salesRate":this.srate,
         "discount":this.dperc,
         "discamountAmount":this.damount,
