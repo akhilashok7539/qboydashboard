@@ -132,7 +132,7 @@ export class AddOffersComponent implements OnInit {
       this.formData.append("available_time", this.atime);
       this.formData.append("clos_time", this.ctime);
       this.formData.append("cashback", this.cashback);
-      this.formData.append("offer_img", this.currentphoto);
+      this.formData.append("upload", this.currentphoto);
       this.formData.append("off", this.otmethod);
       this.formData.append("purchase_price", this.pprice);
 

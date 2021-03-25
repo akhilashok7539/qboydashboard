@@ -104,7 +104,7 @@ export class EditCategoryComponent implements OnInit {
       this.formData.append("show", this.showorhide)
       this.formData.append("category_menutype", this.mtype)
       this.formData.append("state", this.status)
-      this.formData.append("cat_img", this.currentphoto)
+      this.formData.append("upload", this.currentphoto)
       for (let i = 0; i < this.sessiondayssRepat.length; i++) {
         this.formData.append("locationId", this.sessiondayssRepat[i])
 

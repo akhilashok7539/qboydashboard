@@ -43,7 +43,7 @@
                     <!--  Image Column -->
                     <ng-container matColumnDef="image">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Image </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> <img src="{{apiUrl}}category/get/image/{{row._id}}" alt="" style="width: 100px;"> </mat-cell>
+                        <mat-cell *matCellDef="let row"> <img src="{{apiUrl}}category/get/image/{{row.cat_img}}" alt="" style="width: 100px;"> </mat-cell>
                     </ng-container>
 
                     <!-- Action Column -->

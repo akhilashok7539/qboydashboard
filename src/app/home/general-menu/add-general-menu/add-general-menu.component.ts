@@ -92,7 +92,7 @@ export class AddGeneralMenuComponent implements OnInit {
       this.button = 'Processing';
       this.formData.append("itemName", this.iname)
       this.formData.append("itm_description", this.des)
-      this.formData.append("gmenu_img", this.currentphoto)
+      this.formData.append("upload", this.currentphoto)
       this.formData.append("shop_id", this.sname)
       this.formData.append("generalcat_id", this.cname)
       // this.formData.append(""),this.sname

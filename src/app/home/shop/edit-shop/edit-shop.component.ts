@@ -277,7 +277,7 @@ userTypeFilters = [
       this.formData.append("show", this.showorhide)
       this.formData.append("state", this.status)
       this.formData.append("profitpercentage", this.profit)
-      this.formData.append("shop_img", this.currentphoto)
+      this.formData.append("upload", this.currentphoto)
       this.formData.append("shop_address", this.saddress)
 
       // this.formData.append("locationId", this.sessiondayssRepat['0'])

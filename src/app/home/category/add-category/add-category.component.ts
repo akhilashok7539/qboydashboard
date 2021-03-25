@@ -85,7 +85,7 @@ get f() { return this.categoryFormRegistration.controls; }
         this.formData.append("show",this.showorhide)
         this.formData.append("category_menutype",this.mtype)
         this.formData.append("state",this.status)
-        this.formData.append("cat_img",this.currentphoto)
+        this.formData.append("upload",this.currentphoto)
         for (let i = 0; i < this.sessiondayssRepat.length; i++) {
           this.formData.append("locationId", this.sessiondayssRepat[i])
   
@@ -100,7 +100,7 @@ get f() { return this.categoryFormRegistration.controls; }
           this.toaster.success("Category Added Successfully")
           this.formData.delete;
           this.router.navigate(['/home']);
-          window.location.reload();
+       
                  },
          error=>{
           this.isLoading = false;

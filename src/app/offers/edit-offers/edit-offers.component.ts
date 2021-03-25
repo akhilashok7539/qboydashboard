@@ -38,6 +38,7 @@ export class EditOffersComponent implements OnInit {
   button = 'Submit';
   pprice;
   otmethod = 'Offers';
+  offerortopdeal: any;
 
   constructor(private formbuilder: FormBuilder,
     private easydeelservice: EasydealService,
@@ -59,10 +60,10 @@ export class EditOffersComponent implements OnInit {
         aprice: ['', Validators.required],
         adata: ['', Validators.required],
         atime: ['', Validators.required],
-        pprice: ['', Validators.required],
+        pprice: [''],
         ctime: ['', Validators.required],
         cashback: ['', Validators.required],
-        bimages: ['', Validators.required],
+        bimages: [''],
       })
       if(this.otmethod =='Offers')
       {
@@ -87,8 +88,19 @@ export class EditOffersComponent implements OnInit {
     this.atime = this.offer['av_time'];
     this.cashback = this.offer['cashback'];
     this.ctime = this.offer['clos_time'];
+    this.offerortopdeal = this.offer['off'];
+    this.pprice = this.offer['purch_price'];
+    if(this.offerortopdeal == 'Top')
+    {
+      this.otmethod = 'Top';
+      console.log(this.otmethod);
+      
+    }
+    else
+    {
+      this.otmethod = 'Offers';
 
-
+    }
   }
   getallShop() {
     this.easydeelservice.getshop().subscribe(
@@ -129,6 +141,8 @@ export class EditOffersComponent implements OnInit {
     this.button = 'Processing';
     // stop here if form is invalid
     if (this.offerFormRegistration.invalid) {
+      this.isLoading = false;
+      this.button = 'Submit';
       return;
     }
     else {
@@ -146,8 +160,8 @@ export class EditOffersComponent implements OnInit {
       this.formData.append("available_time", this.atime);
       this.formData.append("clos_time", this.ctime);
       this.formData.append("cashback", this.cashback);
-      this.formData.append("offer_img", this.currentphoto);
-
+      this.formData.append("upload", this.currentphoto);
+      this.formData.append("off", this.otmethod);
 
       this.easydeelservice.editoffer(this.formData, this.id).subscribe(
         data => {

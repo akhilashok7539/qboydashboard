@@ -21,7 +21,7 @@
             Choose a method 
         </label><br> Offers
                 <input type="radio" value="Offers" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)"> Top Deals
-                <input type="radio" value="Top Deals" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)">
+                <input type="radio" value="Top" [(ngModel)]="otmethod" (change)="topdealsoroffers(otmethod)">
             </div>
         </div>
 
@@ -177,7 +177,7 @@
                     </div>
                 </div>
 
-                <div class="col-sm-4" *ngIf="otmethod =='Top Deals'">
+                <div class="col-sm-4" *ngIf="otmethod =='Top'">
                     <label for="">Top Deal Image </label>
                     <!-- <input type="file" class="form-control" placeholder="Enter Your Banner Images" [(ngModel)]="bimages" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages"> -->
                     <input class="form-control" #file type="file" (change)="addimg($event)" [ngClass]="{ 'is-invalid': submitted && f.bimages.errors }" formControlName="bimages">

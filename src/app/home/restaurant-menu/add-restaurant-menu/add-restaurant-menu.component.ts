@@ -94,7 +94,7 @@ get f() { return this.restaurantmenuFormRegistration.controls; }
     this.formData.append("menu_desc",this.mdes)
     this.formData.append("menu_type",this.mtype)
     this.formData.append("courceId",this.ctype)
-    this.formData.append("menu_img",this.currentphoto)
+    this.formData.append("upload",this.currentphoto)
     for(let i=0;i<this.itemcatarray.length;i++)
     {
       this.formData.append("item_type",this.itemcatarray[i]);

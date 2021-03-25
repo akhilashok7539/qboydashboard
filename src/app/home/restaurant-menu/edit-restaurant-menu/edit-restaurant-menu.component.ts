@@ -114,7 +114,7 @@ export class EditRestaurantMenuComponent implements OnInit {
       this.formData.append("menu_desc", this.mdes)
       this.formData.append("menu_type", this.mtype)
       this.formData.append("courceId", this.ctype)
-      this.formData.append("menu_img", this.currentphoto)
+      this.formData.append("upload", this.currentphoto)
       if(this.condtionyesorno == 'no')
       {
         for(let i=0;i<this.itemcatarrays.length;i++)

@@ -45,7 +45,7 @@
                     <!-- Item Image Column -->
                     <ng-container matColumnDef="itemimage">
                         <mat-header-cell *matHeaderCellDef mat-sort-header> Item Image </mat-header-cell>
-                        <mat-cell *matCellDef="let row"> <img src="{{apiUrl}}/generalitem/get/image/{{row._id}}" alt="" width="100px"> </mat-cell>
+                        <mat-cell *matCellDef="let row"> <img src="{{apiUrl}}/generalitem/get/image/{{row.gmenu_img}}" alt="" width="100px"> </mat-cell>
                     </ng-container>
 
                     <!-- Action Column -->
