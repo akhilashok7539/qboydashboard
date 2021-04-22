@@ -402,4 +402,7 @@ updateprice(sid,req)
 {
   return this.http.patch(this.apiUrl+'addrestaurantmenu/salesrate/shop/'+sid,req);
 }
+editdeliveryboy(req,id){
+  return this.http.patch(this.apiUrl+'deliveryboy/edit/'+id,req);
+}
 }
