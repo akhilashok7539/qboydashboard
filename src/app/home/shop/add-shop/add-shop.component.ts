@@ -11,7 +11,7 @@ import { MatOption } from '@angular/material';
 })
 export class AddShopComponent implements OnInit {
   // shopform:FormGroup;
-  // resttype= '1';
+  
   sessiondayssRepat
   repeatsessiondays = [
     {
@@ -110,7 +110,7 @@ userTypeFilters = [
       sdamnt: ['', Validators.required],
       simage: ['', Validators.required],
       pucharge: ['', Validators.required],
-      // resttype: ['', Validators.required],
+      // dcharge: ['', Validators.required],
       showorhide: [''],
       status: [''],
       check: [''],
@@ -138,10 +138,7 @@ userTypeFilters = [
       console.log( this.shopFormRegistration.controls.userType.value)
     }
   }
-  // changetype()
-  // {
 
-  // }
   onChange(time: string, isChecked: boolean) {
     this.sessiondayssRepat = [];
     const emailFormArray = <FormArray>this.shopFormRegistration.controls.checkeddays;

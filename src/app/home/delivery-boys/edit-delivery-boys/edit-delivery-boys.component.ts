@@ -24,7 +24,6 @@ export class EditDeliveryBoysComponent implements OnInit {
   location;
   deliveryboy:any =[];
   locations:any=[];
-  dboyId: any;
   constructor(private formbuilder: FormBuilder,
     private router:Router,
     private toaster:ToastrService,private easydeelservie:EasydealService) { }
@@ -43,7 +42,6 @@ export class EditDeliveryBoysComponent implements OnInit {
       this.getalllocations();
       this.deliveryboy = JSON.parse(sessionStorage.getItem("deliveryboys"));
       this.location = this.deliveryboy['locationId']._id;
-      this.dboyId =  this.deliveryboy['_id'];
       this.dname = this.deliveryboy['name'];
       this.uname = this.deliveryboy['userName'];
       this.address = this.deliveryboy['address'];
@@ -79,9 +77,9 @@ export class EditDeliveryBoysComponent implements OnInit {
         "password": this.password,
         "state":"Active"
       }
-      this.easydeelservie.editdeliveryboy(req,this.dboyId).subscribe(
+      this.easydeelservie.adddeliveryboy(req).subscribe(
         data =>{
-          this.toaster.success("Delivery Boy updated");
+          this.toaster.success("Delivery Boy Added");
           this.router.navigate(['/deliveryboys']);
         },
         error =>{

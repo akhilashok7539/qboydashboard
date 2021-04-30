@@ -10,21 +10,17 @@ import { EasydealService } from 'src/app/_services/easydeal.service';
   styleUrls: ['./shop.component.css']
 })
 export class ShopComponent implements OnInit {
-  displayedColumns = ['image', 'shopname' , 'phonenumber','status','action'];
+  displayedColumns = ['image', 'shopname', 'phonenumber','status','action'];
   dataSource = new MatTableDataSource();
 
   // @ViewChild(MatSort) sort: MatSort;
   @ViewChild(MatPaginator, { static: false }) paginator: MatPaginator;
   options: any = "";
-  options1: any = "";
-
   results: any=[];
   apiUrl;
   loginstatus:any;
   locationid;
   userdetails;
-  firsteventvalue;
-
   ngAfterViewInit() {
     // this.dataSource.sort = this.sort;
     
@@ -40,7 +36,7 @@ export class ShopComponent implements OnInit {
     console.log(this.userdetails);
     
 
-    this.apiUrl="https://dashboard.qboy.in/";
+    this.apiUrl="https://qboy.in/";
     this.getallShop();
   }
   getallShop(){
@@ -89,103 +85,66 @@ export class ShopComponent implements OnInit {
   }
   selectedevent(s) {
     console.log(s);
-    this.firsteventvalue = s;
     if (s == "s") {
-      if(this.loginstatus =='masteradmin')
+      this.results = [
+        {
+        "id": "`1",
+        "shopname": "Blackforest"
+      },
       {
-        this.easydealservice.getshop().subscribe(
-          data =>{
-            console.log(data);
-            this.results =data;
-            // this.dataSource.data = this.results;
-          },
-          error =>{
-            console.log(error);
-          }
-        )
-      }
-      else if(this.loginstatus == 'locationamin')   
-      {
-        this.locationid=this.userdetails['locationId']._id;
-        console.log(this.locationid);
-  
-      this.easydealservice.getallshopsbylocation(this.locationid).subscribe(
-        data =>{
-          console.log(data);
-          this.results =data;
-          // this.dataSource.data = this.results;
-        },
-        error =>{
-          
-        }
-      )
-        
-      }
-      else if(this.loginstatus =='shopadmin')
-      {
-  
-      }
+        "id": "`1",
+        "shopname": "Adithya"
+      },   {
+        "id": "`1",
+        "shopname": "Murali"
+      },   {
+        "id": "`1",
+        "shopname": "Thaza"
+      },
+    ]
     }
     else if (s == "c") {
-     
+      this.results = [
+        {
+        "id": "`1",
+        "shopname": "Hotel"
+      },
+      {
+        "id": "`1",
+        "shopname": "Restaurant"
+      },   {
+        "id": "`1",
+        "shopname": "Supermarket"
+      },   {
+        "id": "`1",
+        "shopname": "Services"
+      },
+    ]
     }
     else if (s == "l") {
-        this.easydealservice.getalllocations().subscribe(
-          data =>{
-       
-            let arr :any = [];
-            arr = data;
-            this.results = [];
-            for(let i=0;i<arr.length;i++)
-            {
-              let req = {
-                "_id":arr[i]._id,
-                "shop_name":arr[i].location
-              }
-              this.results.push(req)
-
-
-            }
-            console.log(this.results);
-            
-          },
-          error =>{
-            console.log(error);
-            
-          }
-        )
-      }
-
-  }
-  selectedevent1(si)
-  {
-    // this.options1 = si;
-    if(this.firsteventvalue == 'l')
-    {
-      console.log(si);
-      this.easydealservice.getallshopsbylocation(si).subscribe(
-        data =>{
-          console.log(data);
-          let res :any = [];
-          res =data;
-          this.dataSource.data = res;
-        },
-        error =>{
-  
-        }
-      )
-      
+      this.results = [
+        {
+        "id": "`1",
+        "shopname": "Haripad"
+      },
+      {
+        "id": "`1",
+        "shopname": "Kayamkulam"
+      },   {
+        "id": "`1",
+        "shopname": "Mavelikara"
+      },   {
+        "id": "`1",
+        "shopname": "Karunagappally"
+      },
+    ]
     }
-    else if(this.firsteventvalue == 'c')
-    {
-      
-    }
+
   }
   edit(r)
   {
     sessionStorage.setItem("shop",JSON.stringify(r))
-    // this.router.navigate(['/editshop'])
-    window.open('#/editshop', '_blank');
+    this.router.navigate(['/editshop'])
   }
   active(r)
   {

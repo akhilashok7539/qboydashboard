@@ -36,6 +36,7 @@ export class AddOffersComponent implements OnInit {
   pprice;
   button = 'Submit';
   otmethod = 'Offers';
+  showorhide = "Show";
 
   constructor(private formbuilder: FormBuilder, private easydeelservice: EasydealService, private toaster: ToastrService, private router: Router) { }
 
@@ -57,6 +58,8 @@ export class AddOffersComponent implements OnInit {
         ctime: ['', Validators.required],
         cashback: ['', Validators.required],
         bimages: ['', Validators.required],
+        showorhide: ['', Validators.required],
+
       })
     if (this.otmethod == 'Offers') {
       this.offerFormRegistration.get('tqpurc').disable();

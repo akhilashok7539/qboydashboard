@@ -26,7 +26,7 @@ export class OffersComponent implements OnInit {
   constructor( private easydeelservice: EasydealService, private toaster: ToastrService, private router: Router) { }
 
   ngOnInit() {
-    this.apiurl="https://dashboard.qboy.in/";
+    this.apiurl="https://qboy.in/";
     this.getalloffers();
 
   }

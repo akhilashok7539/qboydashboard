@@ -20,7 +20,7 @@ export class ViewimageComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.apiUrl = "https://dashboard.qboy.in/";
+    this.apiUrl = "https://qboy.in/";
   }
 
 }
