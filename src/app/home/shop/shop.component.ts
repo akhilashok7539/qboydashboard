@@ -36,7 +36,7 @@ export class ShopComponent implements OnInit {
     console.log(this.userdetails);
     
 
-    this.apiUrl="https://qboy.in/";
+    this.apiUrl="https://dashboard.qboy.in/";
     this.getallShop();
   }
   getallShop(){
